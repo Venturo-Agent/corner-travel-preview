@@ -90,4 +90,23 @@
       });
     }, {passive:true});
   }
+  // ---------- 收藏的角落：照片視差（捲動景深；和紙切入靠 .reveal→.in 觸發） ----------
+  var lcards = document.querySelectorAll('.land-card');
+  if(lcards.length && !reduce){
+    var lraf = false;
+    var lpar = function(){
+      var vh = window.innerHeight;
+      lcards.forEach(function(c){
+        var r = c.getBoundingClientRect();
+        if(r.bottom < -60 || r.top > vh + 60) return;
+        var prog = ((r.top + r.height/2) - vh/2) / vh;
+        if(prog > 0.6) prog = 0.6; if(prog < -0.6) prog = -0.6;
+        var img = c.querySelector('img');
+        if(img) img.style.transform = 'translateY(' + (prog * -30) + 'px) scale(1.12)';
+      });
+      lraf = false;
+    };
+    window.addEventListener('scroll', function(){ if(lraf) return; lraf = true; requestAnimationFrame(lpar); }, {passive:true});
+    lpar();
+  }
 })();

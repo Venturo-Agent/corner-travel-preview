@@ -85,25 +85,25 @@
   /* ===== 收藏的角落：六國和紙對角切入（統一左上+右下；只用在這一段） ===== */
   .land-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
   .land-card{position:relative;height:440px;overflow:hidden;display:block;cursor:pointer}
-  .land-card>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:saturate(.94) contrast(1.03) brightness(.92) sepia(.03);transition:transform 1.8s var(--ease-expo)}
-  .land-card:hover>img{transform:scale(1.06)}
+  .land-card>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:saturate(.94) contrast(1.03) brightness(.92) sepia(.03);transform:scale(1.12);will-change:transform}
   .land-card .paper{position:absolute;inset:0;z-index:1;opacity:0;transition:transform .9s var(--ease-expo),opacity .6s var(--ease-expo);filter:drop-shadow(0 6px 18px rgba(0,0,0,.28))}
   .land-card .paper .shade{position:absolute;inset:0;background:rgba(18,13,8,.22)}
   .land-card .paper .tint{position:absolute;inset:0;background:var(--accent);opacity:.26;mix-blend-mode:multiply}
   .land-card .paper .pat{position:absolute;inset:0;width:100%;height:100%;opacity:.6}
   .land-card .p1{clip-path:polygon(0 0,74% 0,0 74%);transform:translate(-28%,-28%)}
   .land-card .p2{clip-path:polygon(100% 100%,26% 100%,100% 26%);transform:translate(28%,28%)}
-  .land-card:hover .paper{opacity:1;transform:translate(0,0)}
+  .land-card.in .paper,.land-card:hover .paper{opacity:1;transform:translate(0,0)}
   .land-card .grad{position:absolute;inset:0;z-index:2;pointer-events:none;background:linear-gradient(0deg,rgba(16,12,8,.8) 0%,rgba(16,12,8,.3) 30%,transparent 54%)}
   .land-card .lc-info{position:absolute;left:26px;right:26px;bottom:26px;z-index:3}
   .land-card .lc-info .en{font-family:"Cormorant Garamond",serif;font-weight:500;text-transform:uppercase;letter-spacing:.24em;font-size:12px;color:var(--accent);margin-bottom:5px;display:block;text-shadow:0 1px 6px rgba(0,0,0,.6)}
   .land-card .lc-info h3{font-family:"Noto Serif TC",serif;font-weight:600;font-size:28px;color:#fff;letter-spacing:.08em;text-shadow:0 2px 14px rgba(0,0,0,.7)}
   .land-card .lc-info .rv{max-height:0;opacity:0;transform:translateY(8px);overflow:hidden;transition:max-height .6s var(--ease-expo),opacity .55s var(--ease-expo) .15s,transform .55s var(--ease-expo) .15s}
-  .land-card:hover .lc-info .rv{max-height:80px;opacity:1;transform:none}
+  .land-card.in .lc-info .rv,.land-card:hover .lc-info .rv{max-height:80px;opacity:1;transform:none}
   .land-card .lc-info .sub{display:block;margin-top:8px;font-size:13px;letter-spacing:.05em;color:rgba(255,255,255,.9);text-shadow:0 1px 8px rgba(0,0,0,.7)}
   .land-card .lc-info .enter{display:block;margin-top:7px;font-size:12.5px;letter-spacing:.08em;color:#fff}
   @media(max-width:980px){.land-grid{grid-template-columns:1fr 1fr}}
-  @media(max-width:680px){.land-grid{grid-template-columns:1fr}.land-card{height:360px}.land-card .paper{opacity:1!important;transform:translate(0,0)!important}.land-card .lc-info .rv{max-height:80px!important;opacity:1!important;transform:none!important}}
+  @media(max-width:680px){.land-grid{grid-template-columns:1fr}.land-card{height:360px}}
+  @media(prefers-reduced-motion:reduce){.land-card .paper{opacity:1;transform:none;transition:none}.land-card .lc-info .rv{max-height:80px;opacity:1;transform:none}}
 </style>
 </head>
 <body>
