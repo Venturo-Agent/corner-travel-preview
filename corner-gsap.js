@@ -33,8 +33,8 @@
     // 3) 圖片框內視差：遮罩(框)固定、裡面照片隨捲動上下位移（Izanami 波動感）
     gsap.utils.toArray('.px-img').forEach(function(img){
       var frame = img.closest('.land-card,.trip-card,.wb-photo,.testi,.px-frame') || img.parentElement;
-      gsap.fromTo(img, {yPercent:-8}, {
-        yPercent:8, ease:'none',
+      gsap.fromTo(img, {yPercent:-13}, {
+        yPercent:13, ease:'none',
         scrollTrigger:{ trigger:frame, start:'top bottom', end:'bottom top', scrub:true }
       });
     });
@@ -53,12 +53,24 @@
     if(cue) gsap.to(cue, {opacity:0, ease:'none',
       scrollTrigger:{ trigger:'.hero', start:'top top', end:'15% top', scrub:true }});
 
-    // 5) 為什麼：不規則高低四塊，捲動時依序滑入定位
-    var wb = gsap.utils.toArray('.why-stagger .why-block');
-    if(wb.length) gsap.from(wb, {
-      opacity:0, y:90, duration:1.05, ease:'power3.out', stagger:.14,
-      scrollTrigger:{ trigger:'.why-stagger', start:'top 80%', once:true }
+    // 5) 為什麼/怎麼進行：手風琴各欄捲動時依序滑入、定位成原本欄位後保留 hover 展開
+    gsap.utils.toArray('.slant-acc').forEach(function(acc){
+      gsap.from(acc.querySelectorAll('.slant-col'), {
+        opacity:0, y:96, duration:1.05, ease:'power3.out', stagger:.13,
+        scrollTrigger:{ trigger:acc, start:'top 82%', once:true }
+      });
     });
+
+    // 6) Showcase：釘住整屏，圖框寬高隨捲動展開到滿版，slogan 浮現（Izanami 式線框寬幅變化）
+    if(document.querySelector('.showcase')){
+      var sctl = gsap.timeline({ scrollTrigger:{
+        trigger:'.showcase', start:'top top', end:'bottom bottom', scrub:.6,
+        pin:'.sc-pin', anticipatePin:1
+      }});
+      sctl.fromTo('.sc-frame', {width:'34vw', height:'56vh'},
+                  {width:'100vw', height:'100vh', ease:'power1.inOut', duration:1})
+          .from('.sc-cap', {opacity:0, y:44, duration:.5}, 0.35);
+    }
 
     return function(){ /* cleanup handled by matchMedia revert */ };
   });

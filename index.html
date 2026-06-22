@@ -106,7 +106,16 @@
   @media(prefers-reduced-motion:reduce){.land-card .cut{opacity:1;transform:none;transition:none}.land-card .lc-info .rv{max-height:80px;opacity:1;transform:none}}
 
   /* ===== GSAP 動態：框內視差 / 為什麼不規則高低 / 捲動提示 ===== */
-  .px-img{position:absolute!important;top:-12%!important;left:0;width:100%;height:124%!important;object-fit:cover}
+  .px-img{position:absolute!important;top:-20%!important;left:0;width:100%;height:140%!important;object-fit:cover}
+  /* Showcase：釘住 + 圖框寬幅展開 */
+  .showcase{height:230vh;position:relative}
+  .sc-pin{height:100vh;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;background:var(--ink)}
+  .sc-frame{position:relative;width:34vw;height:56vh;overflow:hidden;box-shadow:0 30px 80px -30px rgba(0,0,0,.6);outline:1px solid rgba(201,166,120,.25)}
+  .sc-frame .sc-img{position:absolute;top:-12%;left:0;width:100%;height:124%;object-fit:cover;filter:saturate(.94) contrast(1.04) brightness(.86) sepia(.04)}
+  .sc-cap{position:absolute;z-index:3;left:0;right:0;text-align:center;color:#fff;pointer-events:none;padding:0 8%}
+  .sc-cap .kicker{justify-content:center;color:var(--gold-bright);margin-bottom:18px}
+  .sc-cap h2{font-family:"Noto Serif TC",serif;font-weight:500;font-size:clamp(24px,3.4vw,44px);line-height:1.55;letter-spacing:.08em;text-shadow:0 2px 24px rgba(0,0,0,.7)}
+  @media(max-width:680px){.sc-frame{width:78vw;height:48vh}}
   .scroll-cue{position:absolute;left:50%;bottom:34px;transform:translateX(-50%);z-index:3;display:flex;flex-direction:column;align-items:center;gap:10px;color:var(--paper-dim)}
   .scroll-cue .line{width:1px;height:48px;background:linear-gradient(var(--gold),transparent);animation:cuePulse 2.2s ease-in-out infinite}
   .scroll-cue .t{font-family:"Cormorant Garamond",serif;font-style:italic;font-size:12px;letter-spacing:.26em;text-transform:uppercase}
@@ -222,6 +231,17 @@
   </div>
 </section>
 
+<!-- ===== Showcase：釘住 + 圖框寬幅隨捲動展開到滿版（Izanami 式） ===== -->
+<section class="showcase">
+  <div class="sc-pin">
+    <div class="sc-frame"><img class="sc-img" src="assets/photos/halong-bay.jpg" alt="下龍灣"></div>
+    <div class="sc-cap">
+      <div class="kicker">CORNER · 角落<span class="sep"></span><span class="cn">如果可以</span></div>
+      <h2 class="sc-line">如果可以，<br>讓我們一同探索<br>世界上每個角落。</h2>
+    </div>
+  </div>
+</section>
+
 <!-- ===== 為什麼（斜切平行四邊形手風琴，與越南頁一致） ===== -->
 <section class="sec dark-lux" id="why">
   <div class="wrap">
@@ -232,11 +252,31 @@
         <span class="h2cn">為什麼選擇角落的小包團</span>
         <p class="lead">不是把你塞進別人的行程，而是把整趟旅行，重新為你一個人安排。滑過每一片，看我們怎麼陪你走。</p>
       </div>
-      <div class="why-stagger">
-        <div class="why-block wb1"><div class="wb-photo"><img class="px-img" src="assets/photos/tea-house.jpg" alt=""></div><div class="wb-veil"></div><div class="wb-text"><h3>不拼團<br>只走自己人</h3><p>4–8 人成行，全程都是你認識的人。</p></div></div>
-        <div class="why-block wb2"><div class="wb-photo"><img class="px-img" src="assets/photos/china-scenic.jpg" alt=""></div><div class="wb-veil"></div><div class="wb-text"><h3>行程<br>為你量身</h3><p>不買現成套裝，一條一條陪你排。</p></div></div>
-        <div class="why-block wb3"><div class="wb-photo"><img class="px-img" src="assets/photos/korea-palace.jpg" alt=""></div><div class="wb-veil"></div><div class="wb-text"><h3>在地的<br>角落體驗</h3><p>帶你去當地人才知道的小地方。</p></div></div>
-        <div class="why-block wb4"><div class="wb-photo"><img class="px-img" src="assets/photos/thailand-wat.jpg" alt=""></div><div class="wb-veil"></div><div class="wb-text"><h3>一對一<br>旅程管家</h3><p>從規劃到回家，同一個人全程顧你。</p></div></div>
+      <div class="slant-acc">
+        <div class="slant-col" tabindex="0">
+          <div class="ph"><img src="assets/photos/tea-house.jpg" alt=""></div>
+          <div class="veil"></div><span class="corner"></span>
+          <div class="v-title">不拼團</div>
+          <div class="h-body"><h3>不拼團、只走自己人</h3><p>4–8 人成行，全程都是你認識的人。沒有陌生人趕你上車，節奏你們決定。</p></div>
+        </div>
+        <div class="slant-col" tabindex="0">
+          <div class="ph"><img src="assets/photos/china-scenic.jpg" alt=""></div>
+          <div class="veil"></div><span class="corner"></span>
+          <div class="v-title">為你量身</div>
+          <div class="h-body"><h3>行程為你量身</h3><p>不買現成套裝，一條一條陪你排。想多待半天、想換一間餐廳，都是本來就該有的彈性。</p></div>
+        </div>
+        <div class="slant-col" tabindex="0">
+          <div class="ph"><img src="assets/photos/korea-palace.jpg" alt=""></div>
+          <div class="veil"></div><span class="corner"></span>
+          <div class="v-title">在地角落</div>
+          <div class="h-body"><h3>在地的角落體驗</h3><p>帶你去當地人才知道的小地方。不是打卡名單，是會讓你回味很久的那些轉角。</p></div>
+        </div>
+        <div class="slant-col" tabindex="0">
+          <div class="ph"><img src="assets/photos/thailand-wat.jpg" alt=""></div>
+          <div class="veil"></div><span class="corner"></span>
+          <div class="v-title">旅程管家</div>
+          <div class="h-body"><h3>一對一旅程管家</h3><p>從規劃到回家，同一個人全程顧你。不轉接、不踢皮球，每件小事都有人接住。</p></div>
+        </div>
       </div>
     </div>
   </div>
