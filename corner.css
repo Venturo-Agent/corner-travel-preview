@@ -224,12 +224,13 @@ nav.over-hero:not(.scrolled) .nav-toggle span{background:var(--paper)}
 .slant-col .h-body h3{font-family:"Noto Serif TC",serif;font-weight:500;font-size:25px;letter-spacing:.04em;color:var(--paper);margin-bottom:10px}
 .slant-col .h-body p{font-family:"Noto Serif TC",serif;font-weight:400;font-size:15px;line-height:1.8;color:var(--paper-dim);max-width:18em}
 .slant-col .corner{position:absolute;top:16px;right:30px;width:22px;height:22px;border-top:1px solid var(--gold);border-right:1px solid var(--gold);transform:skewX(7deg);opacity:0;transition:opacity .4s var(--ease-expo);z-index:3}
+/* 只用 hover 驅動展開：移除 :focus-within 避免點到後「卡住」黏著展開 */
 .slant-acc:hover .slant-col{flex-grow:.6}
-.slant-col:hover,.slant-col:focus-within{flex-grow:3}
-.slant-col:hover .ph,.slant-col:focus-within .ph{transform:skewX(7deg) scale(1.55)}
-.slant-col:hover .v-title,.slant-col:focus-within .v-title{opacity:0}
-.slant-col:hover .h-body,.slant-col:focus-within .h-body{opacity:1}
-.slant-col:hover .corner,.slant-col:focus-within .corner{opacity:1}
+.slant-col:hover{flex-grow:3}
+.slant-col:hover .ph{transform:skewX(7deg) scale(1.55)}
+.slant-col:hover .v-title{opacity:0}
+.slant-col:hover .h-body{opacity:1}
+.slant-col:hover .corner{opacity:1}
 
 @media(max-width:900px){
   .why-split{grid-template-columns:1fr;gap:var(--s5)}
