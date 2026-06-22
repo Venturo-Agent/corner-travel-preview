@@ -111,14 +111,13 @@
   /* ===== 深色負片貫穿（Izanami 路線）：固定森林底圖 + 內容半透明疊上 ===== */
   html{background:#0d0f0e}
   body{background:transparent!important}
-  .page-bg{position:fixed;inset:0;z-index:-2;overflow:hidden;background:linear-gradient(180deg,rgba(11,13,12,.5) 0%,rgba(11,13,12,.72) 60%,rgba(11,13,12,.82) 100%), #0d0f0e url("assets/photos/forest-bg.jpg") center/cover no-repeat}
-  .page-bg .fog{position:absolute;inset:0;overflow:hidden;pointer-events:none;mix-blend-mode:screen}
-  .page-bg .fog svg{position:absolute;top:-30%;left:-30%;width:160%;height:160%;display:block;will-change:transform}
-  .page-bg .fog .fs1{opacity:.6;filter:blur(6px);animation:fogX1 24s linear infinite alternate}
-  .page-bg .fog .fs2{opacity:.42;filter:blur(12px);animation:fogX2 36s linear infinite alternate}
-  @keyframes fogX1{from{transform:translate3d(-16%,1%,0)}to{transform:translate3d(16%,-5%,0)}}
-  @keyframes fogX2{from{transform:translate3d(14%,4%,0)}to{transform:translate3d(-16%,-4%,0)}}
-  @media(prefers-reduced-motion:reduce){.page-bg .fog svg{animation:none}}
+  .page-bg{position:fixed;inset:0;z-index:-2;overflow:hidden;background:#0d0f0e}
+  .pb-forest{position:absolute;inset:-8%;background:url("assets/photos/forest-bg.jpg") center/cover no-repeat;will-change:transform;animation:forestDrift 70s ease-in-out infinite alternate}
+  .pb-veil{position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,13,12,.5) 0%,rgba(11,13,12,.72) 60%,rgba(11,13,12,.82) 100%)}
+  .pb-fog{position:absolute;inset:-20%;background:url("assets/photos/fog-layer.jpg") center/cover no-repeat;mix-blend-mode:screen;opacity:.5;filter:blur(14px);will-change:transform;animation:fogDrift 48s linear infinite alternate}
+  @keyframes forestDrift{from{transform:scale(1.05) translate(-1.4%,0.6%)}to{transform:scale(1.12) translate(1.6%,-1.4%)}}
+  @keyframes fogDrift{from{transform:translate(-9%,1%) scale(1.14)}to{transform:translate(9%,-4%) scale(1.24)}}
+  @media(prefers-reduced-motion:reduce){.pb-forest,.pb-fog{animation:none}}
   .sec-head h2,.sec-head .h2cn{color:var(--paper)}
   .sec-head .lead{color:var(--paper-dim)}
   .grid-foot .btn-ghost{color:var(--paper)}
@@ -174,7 +173,7 @@
 </style>
 </head>
 <body>
-<div class="page-bg"><div class="fog"><svg class="fs1" viewBox="0 0 600 400" preserveAspectRatio="xMidYMid slice"><filter id="fgn1"><feTurbulence type="fractalNoise" baseFrequency="0.008 0.013" numOctaves="4" seed="11" stitchTiles="stitch"/><feColorMatrix type="matrix" values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0.55 0.55 0.55 0 -0.5"/></filter><rect width="600" height="400" filter="url(#fgn1)"/></svg><svg class="fs2" viewBox="0 0 600 400" preserveAspectRatio="xMidYMid slice"><filter id="fgn2"><feTurbulence type="fractalNoise" baseFrequency="0.013 0.02" numOctaves="3" seed="4" stitchTiles="stitch"/><feColorMatrix type="matrix" values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0.5 0.5 0.5 0 -0.55"/></filter><rect width="600" height="400" filter="url(#fgn2)"/></svg></div></div>
+<div class="page-bg"><div class="pb-forest"></div><div class="pb-veil"></div><div class="pb-fog"></div></div>
 <svg width="0" height="0" aria-hidden="true" style="position:absolute"><defs>
   <pattern id="shippo" width="46" height="46" patternUnits="userSpaceOnUse"><g fill="none" stroke="#AFC4E0" stroke-width="1.3"><circle cx="23" cy="23" r="23"/><circle cx="0" cy="23" r="23"/><circle cx="46" cy="23" r="23"/><circle cx="23" cy="0" r="23"/><circle cx="23" cy="46" r="23"/></g><g fill="#AFC4E0"><circle cx="23" cy="23" r="1.8"/></g></pattern>
   <pattern id="cnLat" width="52" height="52" patternUnits="userSpaceOnUse"><g fill="none" stroke="#E5B3A6" stroke-width="1.3"><rect x="10" y="10" width="32" height="32"/><path d="M26 0 L52 26 L26 52 L0 26 Z"/><path d="M0 0 L10 10 M52 0 L42 10 M0 52 L10 42 M52 52 L42 42"/></g><g fill="#E5B3A6"><circle cx="26" cy="26" r="1.8"/><circle cx="26" cy="0" r="1.4"/><circle cx="26" cy="52" r="1.4"/><circle cx="0" cy="26" r="1.4"/><circle cx="52" cy="26" r="1.4"/></g></pattern>
