@@ -24,7 +24,9 @@
   .demoA .stage>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
   .screen{position:absolute;top:0;right:0;bottom:0;width:52%}
   .screen .shade{position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(16,12,8,.5) 38%,rgba(16,12,8,.62))}
-  .screen .lat{position:absolute;inset:0;width:100%;height:100%}
+  .screen .lat{position:absolute;inset:0;width:100%;height:100%;opacity:.6;
+    -webkit-mask-image:linear-gradient(90deg,transparent 0%,rgba(0,0,0,.5) 42%,#000 100%);
+    mask-image:linear-gradient(90deg,transparent 0%,rgba(0,0,0,.5) 42%,#000 100%)}
   .screen .edge{position:absolute;top:0;bottom:0;left:0;width:2px;background:linear-gradient(var(--gold),transparent)}
 
   /* Demo B：描邊團花角飾（線條鏤空、縫隙露照片，呼應品牌「角」） */
