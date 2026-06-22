@@ -28,6 +28,9 @@
     });
   }
 
+  // 若頁面載入了 GSAP（首頁 corner-gsap.js），由它接管 reveal/視差；此處只保留 nav/選單，避免雙系統打架
+  if(window.gsap) return;
+
   // ---------- REVEAL：交錯入場（index×60ms，標題再慢 0.1s） ----------
   var els = document.querySelectorAll('.reveal');
   var reduce = window.matchMedia('(prefers-reduced-motion:reduce)').matches;
