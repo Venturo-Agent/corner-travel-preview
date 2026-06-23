@@ -62,9 +62,33 @@
   .fuji-map-svg .cm-pin .lbl{fill:#fff;font-family:"Noto Serif TC",serif;font-weight:500;font-size:5.4px;letter-spacing:.1em;dominant-baseline:middle;paint-order:stroke;stroke:rgba(0,0,0,.55);stroke-width:.5;vector-effect:non-scaling-stroke}
   @keyframes fujiPulse{0%{stroke-opacity:.9;transform:scale(1)}70%{stroke-opacity:0;transform:scale(2.8)}100%{stroke-opacity:0;transform:scale(2.8)}}
   @media(max-width:860px){.fuji-loc .wrap{grid-template-columns:1fr;gap:var(--s5)}.fuji-map{order:-1}}
+
+  /* ===== 固定森林深底（對齊首頁沉浸感） ===== */
+  body{background:transparent!important}
+  .page-bg{position:fixed;inset:0;z-index:-2;overflow:hidden;background:#0d0f0e}
+  .pb-forest{position:absolute;inset:-8%;background:url("assets/photos/forest-bg.jpg") center/cover no-repeat;will-change:transform;animation:forestDrift 46s ease-in-out infinite alternate}
+  .pb-veil{position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,13,12,.5) 0%,rgba(11,13,12,.72) 60%,rgba(11,13,12,.82) 100%)}
+  .pb-fog{position:absolute;inset:-22%;background:url("assets/photos/fog-layer.jpg") center/cover no-repeat;mix-blend-mode:screen;opacity:.34;filter:blur(11px) saturate(0);will-change:transform;animation:fogDrift 26s linear infinite alternate}
+  @keyframes forestDrift{from{transform:scale(1.05) translate(-1.4%,0.6%)}to{transform:scale(1.12) translate(1.6%,-1.4%)}}
+  @keyframes fogDrift{from{transform:translate(-9%,1%) scale(1.14)}to{transform:translate(9%,-4%) scale(1.24)}}
+  @media(prefers-reduced-motion:reduce){.pb-forest,.pb-fog{animation:none}}
+
+  /* ===== 行程區：深色透明卡、文字轉淺 ===== */
+  .sec .sec-head h2,.sec .sec-head .h2cn{color:var(--paper)}
+  .sec .sec-head .kicker .cn{color:var(--paper-dim)}
+  .itin{background:rgba(18,16,14,.52);backdrop-filter:blur(7px);-webkit-backdrop-filter:blur(7px);border:1px solid rgba(230,199,156,.16);border-radius:4px;padding:clamp(18px,3.4vw,44px)}
+  .itin-day{border-top-color:rgba(230,199,156,.16)}
+  .itin-day:last-child{border-bottom-color:rgba(230,199,156,.16)}
+  .itin-d .dsub{color:rgba(219,208,192,.55)}
+  .itin-route{color:rgba(244,238,228,.92)}
+  .itin-meta{color:rgba(219,208,192,.72);border-top-color:rgba(255,255,255,.14)}
+  .itin-meta b{color:var(--gold-bright)}
+  .tour-note{background:rgba(18,16,14,.5);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);border-left:2px solid var(--gold)}
+  .tour-note p{color:rgba(219,208,192,.8)}
 </style>
 </head>
 <body>
+<div class="page-bg"><div class="pb-forest"></div><div class="pb-veil"></div><div class="pb-fog"></div></div>
 
 <nav id="nav" class="over-hero">
   <a href="index.html" class="logo"><span class="mark">角</span><span class="cn2">落</span><span class="dot">·</span><span class="en">Corner</span></a>
