@@ -71,6 +71,14 @@
     '.yzcw-input{flex:1;border:1px solid rgba(0,0,0,.15);border-radius:8px;padding:9px 11px;font-size:14px;outline:none;resize:none;font-family:inherit}' +
     '.yzcw-input:focus{border-color:' + COLOR + '}' +
     '.yzcw-send{border:none;border-radius:8px;background:' + COLOR + ';color:#fff;padding:0 16px;font-size:14px;cursor:pointer}' +
+    '.yzcw-form{flex:1;display:none;flex-direction:column;gap:9px;padding:16px;overflow-y:auto;background:#fff}' +
+    '.yzcw-panel.show-form .yzcw-form{display:flex}' +
+    '.yzcw-panel.show-form .yzcw-msgs,.yzcw-panel.show-form .yzcw-foot{display:none}' +
+    '.yzcw-form-intro{font-size:13px;line-height:1.7;color:#666;margin:0 0 4px}' +
+    '.yzcw-form input{border:1px solid rgba(0,0,0,.16);border-radius:8px;padding:10px 12px;font-size:14px;outline:none;font-family:inherit}' +
+    '.yzcw-form input:focus{border-color:' + COLOR + '}' +
+    '.yzcw-form-err{font-size:12px;color:#c0392b;min-height:1em;line-height:1.4}' +
+    '.yzcw-form-go{border:none;border-radius:8px;background:' + COLOR + ';color:#fff;padding:11px;font-size:14.5px;cursor:pointer;margin-top:2px}' +
     '.yzcw-send:disabled{opacity:.5;cursor:default}'
   var styleEl = document.createElement('style')
   styleEl.textContent = css
@@ -86,6 +94,14 @@
   panel.className = 'yzcw-panel'
   panel.innerHTML =
     '<div class="yzcw-head"><span></span><button class="yzcw-close" aria-label="關閉">✕</button></div>' +
+    '<div class="yzcw-form">' +
+      '<p class="yzcw-form-intro">留個聯絡方式，方便我們顧問後續為您安排與回覆。</p>' +
+      '<input class="yzcw-f-name" type="text" autocomplete="name" placeholder="您的稱呼／姓名">' +
+      '<input class="yzcw-f-phone" type="tel" autocomplete="tel" placeholder="聯絡電話">' +
+      '<input class="yzcw-f-email" type="email" autocomplete="email" placeholder="Email">' +
+      '<div class="yzcw-form-err"></div>' +
+      '<button class="yzcw-form-go">開始諮詢</button>' +
+    '</div>' +
     '<div class="yzcw-msgs"></div>' +
     '<div class="yzcw-foot"><textarea class="yzcw-input" rows="1" placeholder="輸入訊息…"></textarea><button class="yzcw-send">送出</button></div>'
   panel.querySelector('.yzcw-head span').textContent = TITLE
@@ -122,13 +138,29 @@
       })
   }
 
+  var CONTACT_KEY = 'yz_chat_contact'
+  function hasContact() {
+    try {
+      return !!localStorage.getItem(CONTACT_KEY)
+    } catch (e) {
+      return false
+    }
+  }
   function toggle(open) {
     panel.classList.toggle('open', open)
-    if (open && !greeted) {
-      greeted = true
-      showGreeting()
+    if (!open) return
+    if (!hasContact()) {
+      // 還沒留聯絡方式 → 先出表單、填完才進對話
+      panel.classList.add('show-form')
+      var n = panel.querySelector('.yzcw-f-name')
+      if (n) n.focus()
+    } else {
+      if (!greeted) {
+        greeted = true
+        showGreeting()
+      }
+      input.focus()
     }
-    if (open) input.focus()
   }
   function rememberClosed() {
     try {
@@ -161,10 +193,8 @@
   }
 
   var busy = false
-  function send() {
-    var text = input.value.trim()
+  function postMessage(text) {
     if (!text || busy) return
-    input.value = ''
     addMsg(text, 'me')
     busy = true
     sendBtn.disabled = true
@@ -193,11 +223,54 @@
         input.focus()
       })
   }
+  function send() {
+    var text = input.value.trim()
+    if (!text) return
+    input.value = ''
+    postMessage(text)
+  }
   sendBtn.addEventListener('click', send)
   input.addEventListener('keydown', function (e) {
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault()
       send()
+    }
+  })
+
+  // ── 對話前表單：收姓名/電話/Email、填完當第一則訊息送進收件匣 ──
+  var formGo = panel.querySelector('.yzcw-form-go')
+  var errBox = panel.querySelector('.yzcw-form-err')
+  function submitForm() {
+    var name = panel.querySelector('.yzcw-f-name').value.trim()
+    var phone = panel.querySelector('.yzcw-f-phone').value.trim()
+    var email = panel.querySelector('.yzcw-f-email').value.trim()
+    if (!name || !phone || !email) {
+      errBox.textContent = '請完整留下姓名、電話與 Email。'
+      return
+    }
+    if (phone.replace(/[^0-9]/g, '').length < 7) {
+      errBox.textContent = '電話格式怪怪的、再確認一下。'
+      return
+    }
+    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) {
+      errBox.textContent = 'Email 格式怪怪的、再確認一下。'
+      return
+    }
+    errBox.textContent = ''
+    try {
+      localStorage.setItem(CONTACT_KEY, JSON.stringify({ name: name, phone: phone, email: email }))
+    } catch (e) {
+      /* storage 被擋也照常進對話 */
+    }
+    panel.classList.remove('show-form')
+    greeted = true
+    postMessage('您好，我想諮詢角落的行程。\n姓名：' + name + '\n電話：' + phone + '\nEmail：' + email)
+  }
+  formGo.addEventListener('click', submitForm)
+  panel.querySelector('.yzcw-form').addEventListener('keydown', function (e) {
+    if (e.key === 'Enter' && e.target.tagName === 'INPUT') {
+      e.preventDefault()
+      submitForm()
     }
   })
 })()
