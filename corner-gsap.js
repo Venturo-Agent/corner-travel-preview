@@ -16,7 +16,7 @@
     i = (n + slides.length) % slides.length;
     slides[i].classList.add('active'); if(dots[i]) dots[i].classList.add('on'); if(cmaps[i]) cmaps[i].classList.add('active');
   }
-  function loop(){ if(!reduceM) timer = setInterval(function(){ go(i+1); }, 3000); }
+  function loop(){ if(!reduceM) timer = setInterval(function(){ go(i+1); }, 5000); }
   function reset(){ clearInterval(timer); loop(); }
   if(!slides[0].classList.contains('active')) slides[0].classList.add('active');
   if(dots[0]) dots[0].classList.add('on');
