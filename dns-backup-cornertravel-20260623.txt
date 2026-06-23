@@ -1,0 +1,17 @@
+# cornertravel.com.tw DNS 備份 (16 筆) zone=8241e9760e0915181e76169722da4aa3
+A      api.cornertravel.com.tw             -> 217.142.233.37 | proxied=True ttl=1
+A      erp.cornertravel.com.tw             -> 217.142.233.37 | proxied=True ttl=1
+A      txg.cornertravel.com.tw             -> 217.142.233.37 | proxied=False ttl=1
+CNAME  app.cornertravel.com.tw             -> 8112b4d20eeb27c6.vercel-dns-017.com | proxied=True ttl=1
+CNAME  cornertravel.com.tw                 -> corner-travel.vercel.app | proxied=True ttl=1
+CNAME  www.cornertravel.com.tw             -> bc650b55f46da7ab.vercel-dns-017.com | proxied=True ttl=1
+MX     cornertravel.com.tw                 -> aspmx.l.google.com prio=1 | proxied=False ttl=1
+MX     cornertravel.com.tw                 -> alt4.aspmx.l.google.com prio=10 | proxied=False ttl=1
+MX     cornertravel.com.tw                 -> alt2.aspmx.l.google.com prio=5 | proxied=False ttl=1
+MX     cornertravel.com.tw                 -> gxipa4bqmpdzmzqwbbt7qgzp4b2mtypbkibm6eu4mu7rcqaleina.mx-verification.google.com prio=15 | proxied=False ttl=1
+MX     cornertravel.com.tw                 -> alt1.aspmx.l.google.com prio=5 | proxied=False ttl=1
+MX     cornertravel.com.tw                 -> alt3.aspmx.l.google.com prio=10 | proxied=False ttl=1
+TXT    _vercel.cornertravel.com.tw         -> "vc-domain-verify=www.cornertravel.com.tw,9bf05017ae3e721474ee" | proxied=False ttl=1
+TXT    _vercel.cornertravel.com.tw         -> "vc-domain-verify=app.cornertravel.com.tw,1ed3184a1d92f8e508f9" | proxied=False ttl=1
+TXT    _vercel.cornertravel.com.tw         -> "vc-domain-verify=cornertravel.com.tw,5b68aecf0ee8b80204ff" | proxied=False ttl=1
+TXT    cornertravel.com.tw                 -> "google-site-verification=se1O2fvnJfr3KfCnuVl4mLU9iAvjZ1ISrO9ks--O78g" | proxied=False ttl=1
