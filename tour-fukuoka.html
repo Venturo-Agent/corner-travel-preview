@@ -130,6 +130,26 @@
   .itin-photo.two img{aspect-ratio:16/10;margin-bottom:6px}
   .itin-photo.two img:last-child{margin-bottom:0}
   @media(max-width:680px){.itin-day{grid-template-columns:1fr}.itin-photo img{aspect-ratio:16/9;margin-bottom:6px}}
+
+  /* ===== 行程區 重新設計 v2 ===== */
+  .flights{max-width:600px;margin:0 auto var(--s6);display:flex;flex-direction:column;gap:9px}
+  .flight-row{display:grid;grid-template-columns:46px 64px 1fr;align-items:center;gap:14px;padding:12px 20px;background:rgba(18,16,14,.5);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);border:1px solid rgba(230,199,156,.16);border-radius:3px}
+  .flight-row .fl-tag{color:var(--gold-bright);letter-spacing:.12em;font-size:14px}
+  .flight-row .fl-no{color:var(--paper);font-family:"Cormorant Garamond",serif;font-size:18px;letter-spacing:.03em}
+  .flight-row .fl-rt{color:rgba(219,208,192,.82);font-size:14px;letter-spacing:.02em}
+  .itin{max-width:1000px;margin:0 auto;background:none!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;border:none!important;padding:0!important;border-radius:0!important}
+  .itin-day{display:grid!important;grid-template-columns:1fr 1fr!important;gap:var(--s5)!important;align-items:center;padding:var(--s6) 0!important;border-top:1px solid rgba(230,199,156,.16)!important}
+  .itin-day:last-child{border-bottom:1px solid rgba(230,199,156,.16)!important}
+  .itin-day:nth-child(even) .itin-photo{order:2}
+  .itin-photo img{width:100%;aspect-ratio:3/2!important;object-fit:cover;border-radius:3px;display:block}
+  .itin-photo.two{display:grid;gap:7px}
+  .itin-photo.two img{aspect-ratio:16/9!important;margin:0!important}
+  .itin-head{display:flex;align-items:baseline;gap:14px;margin-bottom:14px}
+  .itin-head .dnum{font-family:"Cormorant Garamond",serif;font-size:46px;line-height:1;color:var(--gold)}
+  .itin-head .dsub{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:rgba(219,208,192,.55)}
+  .itin-body .itin-route{color:rgba(244,238,228,.92);font-size:15.5px;line-height:1.95;margin-bottom:14px}
+  .itin-body .itin-meta{border-top:1px dashed rgba(255,255,255,.14);padding-top:12px;color:rgba(219,208,192,.72)}
+  @media(max-width:760px){.itin-day{grid-template-columns:1fr!important}.itin-day:nth-child(even) .itin-photo{order:0}}
 </style>
 </head>
 <body>
@@ -304,46 +324,47 @@
       <h2 class="display">Day by day</h2>
       <span class="h2cn">五天四夜・城市、綠茵與海岸</span>
     </div>
-    <div class="tour-note reveal" style="margin-bottom:var(--s5)">
-      <p><b style="color:var(--gold-bright);font-weight:500">航班</b>　去程 CI 110　台北 06:50 → 福岡 09:55<br>　　　　回程 CI 129　福岡 19:10 → 台北 20:35</p>
+        <div class="flights reveal">
+      <div class="flight-row"><span class="fl-tag">去程</span><span class="fl-no">CI 110</span><span class="fl-rt">台北 06:50 → 福岡 09:55</span></div>
+      <div class="flight-row"><span class="fl-tag">回程</span><span class="fl-no">CI 129</span><span class="fl-rt">福岡 19:10 → 台北 20:35</span></div>
     </div>
     <div class="itin">
       <div class="itin-day reveal">
-        <div class="itin-d"><span class="dnum">D1</span><span class="dsub">Arrival</span></div>
-        <div class="itin-photo"><img src="assets/photos/fukuoka/day1-mojiko.jpg" alt="門司港" loading="lazy"></div>
+        <div class="itin-photo"><img src="assets/photos/fukuoka/day1-mojiko.jpg" alt="D1" loading="lazy"></div>
         <div class="itin-body">
+          <div class="itin-head"><span class="dnum">D1</span><span class="dsub">Arrival</span></div>
           <p class="itin-route">抵達福岡，前往門司港走走。漫步懷舊港町，欣賞大正浪漫風情的紅磚建築與海濱景致，為旅程揭開序章。</p>
           <div class="itin-meta"><span><b>住宿</b>THE GATE HOTEL FUKUOKA by HULIC</span></div>
         </div>
       </div>
       <div class="itin-day reveal">
-        <div class="itin-d"><span class="dnum">D2</span><span class="dsub">Golf · Yanagawa</span></div>
-        <div class="itin-photo"><img src="assets/photos/fukuoka/day2-yanagawa.jpg" alt="柳川" loading="lazy"></div>
+        <div class="itin-photo"><img src="assets/photos/fukuoka/day2-yanagawa.jpg" alt="D2" loading="lazy"></div>
         <div class="itin-body">
+          <div class="itin-head"><span class="dnum">D2</span><span class="dsub">Golf · Yanagawa</span></div>
           <p class="itin-route">先生們前往球場揮桿；太太們遊覽水鄉柳川，搭乘傳統川舟悠遊運河、品嚐名物鰻魚蒸籠飯，享受悠然的水都時光。</p>
           <div class="itin-meta"><span><b>住宿</b>THE GATE HOTEL FUKUOKA by HULIC</span></div>
         </div>
       </div>
       <div class="itin-day reveal">
-        <div class="itin-d"><span class="dnum">D3</span><span class="dsub">Golf · Nokonoshima</span></div>
-        <div class="itin-photo"><img src="assets/photos/fukuoka/day3-nokonoshima.jpg" alt="能古島" loading="lazy"></div>
+        <div class="itin-photo"><img src="assets/photos/fukuoka/day3-nokonoshima.jpg" alt="D3" loading="lazy"></div>
         <div class="itin-body">
+          <div class="itin-head"><span class="dnum">D3</span><span class="dsub">Golf · Nokonoshima</span></div>
           <p class="itin-route">先生們再戰球場；太太們搭渡輪前往能古島海島公園（自福岡市約 10 分鐘船程），秋季大片波斯菊與蔚藍海景交織，是必訪的賞花勝地。傍晚移居糸島海濱別墅。</p>
           <div class="itin-meta"><span><b>住宿</b>SEVEN X SEVEN ITOSHIMA</span></div>
         </div>
       </div>
       <div class="itin-day reveal">
-        <div class="itin-d"><span class="dnum">D4</span><span class="dsub">Itoshima</span></div>
-        <div class="itin-photo two"><img src="assets/photos/fukuoka/d4-futamigaura.png" alt="櫻井二見ヶ浦 白鳥居" loading="lazy"><img src="assets/photos/fukuoka/d4-seafood.png" alt="糸島海鮮" loading="lazy"></div>
+        <div class="itin-photo two"><img src="assets/photos/fukuoka/d4-futamigaura.png" alt="D4" loading="lazy"><img src="assets/photos/fukuoka/d4-seafood.png" alt="D4" loading="lazy"></div>
         <div class="itin-body">
+          <div class="itin-head"><span class="dnum">D4</span><span class="dsub">Itoshima</span></div>
           <p class="itin-route">糸島深度觀光。走訪海中佇立白色鳥居的櫻井二見ヶ浦與夫婦岩——糸島最具代表的海岸風景；搭觀光船一覽芥屋大門玄武岩海蝕洞，並品嚐糸島當地時令海鮮。</p>
           <div class="itin-meta"><span><b>住宿</b>SEVEN X SEVEN ITOSHIMA</span></div>
         </div>
       </div>
       <div class="itin-day reveal">
-        <div class="itin-d"><span class="dnum">D5</span><span class="dsub">Departure</span></div>
-        <div class="itin-photo"><img src="assets/photos/fukuoka/sevenxseven-3.webp" alt="糸島海濱" loading="lazy"></div>
+        <div class="itin-photo"><img src="assets/photos/fukuoka/sevenxseven-3.webp" alt="D5" loading="lazy"></div>
         <div class="itin-body">
+          <div class="itin-head"><span class="dnum">D5</span><span class="dsub">Departure</span></div>
           <p class="itin-route">於別墅享用早餐，白天糸島海濱自由漫遊，傍晚整裝前往機場賦歸，或為您延續下一段日本旅程。</p>
           <div class="itin-meta"><span><b>住宿</b>退房 SEVEN X SEVEN ITOSHIMA</span></div>
         </div>
