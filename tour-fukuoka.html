@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>福岡 私人訂製之旅｜角落旅行社 CORNER TRAVEL．私人包團</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=Noto+Serif+TC:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="corner.css">
+<style>
+  /* ===== tour-fuji 專屬（共用元件走 corner.css） ===== */
+  .hero{position:relative;height:82vh;min-height:600px;max-height:920px;overflow:hidden;display:flex;align-items:flex-end}
+  .hero-img{position:absolute;top:-10%;left:0;right:0;height:120%;z-index:0;overflow:hidden}
+  .hero-img img{width:100%;height:100%;object-fit:cover;transform:scale(1.04);animation:kenburns 40s var(--ease-expo) forwards}
+  @keyframes kenburns{to{transform:scale(1.12) translate(-2%,-2%)}}
+  .hero-scrim{position:absolute;inset:0;z-index:1;pointer-events:none;background:
+    radial-gradient(120% 95% at 12% 100%, rgba(16,12,8,.92) 0%, rgba(16,12,8,.5) 32%, transparent 62%),
+    linear-gradient(to bottom, rgba(16,12,8,.55) 0%, transparent 20%),
+    radial-gradient(140% 130% at 50% 42%, transparent 55%, rgba(8,6,4,.5) 100%);}
+  .hero-back{position:absolute;top:calc(var(--s8) - 12px);left:max(var(--s5),calc((100vw - 1280px)/2 + var(--s5)));z-index:3}
+  .hero-back a{color:var(--paper-dim);font-size:14px;letter-spacing:.1em} .hero-back a:hover{color:#fff}
+  .hero-inner{position:relative;z-index:2;width:100%;padding-bottom:var(--s8)}
+  .hero-inner .kicker{margin-bottom:var(--s4)}
+  .hero h1{margin-bottom:var(--s3)}
+  .hero h1 .en{display:block;font-family:"Cormorant Garamond",serif;font-weight:300;font-size:clamp(56px,8vw,116px);line-height:.95;letter-spacing:-.01em;color:var(--paper);text-shadow:0 1px 2px rgba(0,0,0,.6),0 12px 40px rgba(0,0,0,.45)}
+  .hero h1 .cn{display:block;font-family:"Noto Serif TC",serif;font-weight:500;font-size:clamp(26px,3.4vw,42px);letter-spacing:.14em;color:var(--gold-bright);margin-top:10px}
+  .hero-lead{max-width:30em;font-size:18px;line-height:1.9;color:var(--paper-dim);margin-bottom:var(--s5)}
+  .hero-facts{display:flex;gap:var(--s5);flex-wrap:wrap;color:var(--paper-dim);font-size:14px;letter-spacing:.06em}
+  .hero-facts b{color:var(--gold-bright);font-weight:500;margin-right:8px}
+
+  /* 行程表 */
+  .itin{max-width:940px;margin:0 auto}
+  .itin-day{display:grid;grid-template-columns:96px 1fr;gap:var(--s5);padding:var(--s5) 0;border-top:1px solid var(--line)}
+  .itin-day:last-child{border-bottom:1px solid var(--line)}
+  .itin-d .dnum{font-family:"Cormorant Garamond",serif;font-size:46px;line-height:1;color:var(--gold)}
+  .itin-d .dsub{display:block;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:rgba(42,37,32,.5);margin-top:6px}
+  .itin-route{font-family:"Noto Serif TC",serif;font-size:17px;line-height:2;color:var(--ink);margin-bottom:16px}
+  .itin-meta{display:flex;flex-wrap:wrap;gap:10px 32px;font-size:14px;color:rgba(42,37,32,.66);border-top:1px dashed var(--line);padding-top:14px}
+  .itin-meta b{color:var(--gold-deep);font-weight:500;margin-right:8px;letter-spacing:.05em}
+  .tour-note{max-width:940px;margin:var(--s6) auto 0;padding:var(--s5);background:var(--bg-warm,#EDE4D5);border-left:2px solid var(--gold)}
+  .tour-note p{font-size:14.5px;line-height:1.9;color:rgba(42,37,32,.75);margin:0}
+  .tour-cta{text-align:center;margin-top:var(--s7)}
+  @media(max-width:680px){.itin-day{grid-template-columns:1fr;gap:10px}.itin-d{display:flex;align-items:baseline;gap:14px}.itin-d .dsub{margin-top:0}}
+
+  /* 富士山位置 — 深色地圖band（對齊首頁視覺） */
+  .fuji-loc{position:relative;background:var(--ink-deep,#171210);color:var(--paper);overflow:hidden}
+  .fuji-loc::before{content:"";position:absolute;inset:0;background:
+    radial-gradient(120% 90% at 78% 50%, rgba(201,166,120,.10) 0%, transparent 60%),
+    radial-gradient(140% 120% at 50% 120%, transparent 50%, rgba(0,0,0,.5) 100%);pointer-events:none}
+  .fuji-loc .wrap{position:relative;z-index:1;display:grid;grid-template-columns:1.05fr 1fr;gap:var(--s7);align-items:center;padding:var(--s8) 0}
+  .fuji-loc .loc-text .kicker .cn{color:var(--paper-dim)}
+  .fuji-loc .loc-text h2{color:var(--paper)}
+  .fuji-loc .loc-text .h2cn{color:var(--gold-bright)}
+  .fuji-loc .loc-text p{max-width:30em;font-size:16px;line-height:2;color:var(--paper-dim);margin-top:var(--s4)}
+  .fuji-map{position:relative;align-self:center}
+  .fuji-map::before{content:"";position:absolute;inset:-12% -8%;z-index:0;background:radial-gradient(closest-side, rgba(9,11,10,.7) 0%, rgba(9,11,10,.3) 55%, transparent 80%)}
+  .fuji-map-svg{position:relative;z-index:1;width:100%;height:auto;max-height:58vh;overflow:visible;display:block;filter:drop-shadow(0 14px 34px rgba(0,0,0,.55))}
+  .fuji-map-svg path{fill:rgba(201,166,120,.07);stroke:rgba(230,199,156,.7);stroke-width:1;vector-effect:non-scaling-stroke;stroke-linejoin:round}
+  .fuji-map-svg .cm-pin .dot{fill:var(--gold-bright)}
+  .fuji-map-svg .cm-pin .ring{fill:none;stroke:var(--gold-bright);stroke-width:.6;vector-effect:non-scaling-stroke;transform-box:fill-box;transform-origin:center;animation:fujiPulse 2.6s ease-out infinite}
+  .fuji-map-svg .cm-pin .lbl{fill:#fff;font-family:"Noto Serif TC",serif;font-weight:500;font-size:5.4px;letter-spacing:.1em;dominant-baseline:middle;paint-order:stroke;stroke:rgba(0,0,0,.55);stroke-width:.5;vector-effect:non-scaling-stroke}
+  @keyframes fujiPulse{0%{stroke-opacity:.9;transform:scale(1)}70%{stroke-opacity:0;transform:scale(2.8)}100%{stroke-opacity:0;transform:scale(2.8)}}
+  @media(max-width:860px){.fuji-loc .wrap{grid-template-columns:1fr;gap:var(--s5)}.fuji-map{order:-1}}
+
+  /* ===== 固定森林深底（對齊首頁沉浸感） ===== */
+  body{background:transparent!important}
+  .page-bg{position:fixed;inset:0;z-index:-2;overflow:hidden;background:#0d0f0e}
+  .pb-forest{position:absolute;inset:-8%;background:url("assets/photos/forest-bg.jpg") center/cover no-repeat;will-change:transform;animation:forestDrift 46s ease-in-out infinite alternate}
+  .pb-veil{position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,13,12,.5) 0%,rgba(11,13,12,.72) 60%,rgba(11,13,12,.82) 100%)}
+  .pb-fog{position:absolute;inset:-22%;background:url("assets/photos/fog-layer.jpg") center/cover no-repeat;mix-blend-mode:screen;opacity:.34;filter:blur(11px) saturate(0);will-change:transform;animation:fogDrift 26s linear infinite alternate}
+  @keyframes forestDrift{from{transform:scale(1.05) translate(-1.4%,0.6%)}to{transform:scale(1.12) translate(1.6%,-1.4%)}}
+  @keyframes fogDrift{from{transform:translate(-9%,1%) scale(1.14)}to{transform:translate(9%,-4%) scale(1.24)}}
+  @media(prefers-reduced-motion:reduce){.pb-forest,.pb-fog{animation:none}}
+
+  /* ===== 行程區：深色透明卡、文字轉淺 ===== */
+  .sec .sec-head h2,.sec .sec-head .h2cn{color:var(--paper)}
+  .sec .sec-head .kicker .cn{color:var(--paper-dim)}
+  .itin{background:rgba(18,16,14,.52);backdrop-filter:blur(7px);-webkit-backdrop-filter:blur(7px);border:1px solid rgba(230,199,156,.16);border-radius:4px;padding:clamp(18px,3.4vw,44px)}
+  .itin-day{border-top-color:rgba(230,199,156,.16)}
+  .itin-day:last-child{border-bottom-color:rgba(230,199,156,.16)}
+  .itin-d .dsub{color:rgba(219,208,192,.55)}
+  .itin-route{color:rgba(244,238,228,.92)}
+  .itin-meta{color:rgba(219,208,192,.72);border-top-color:rgba(255,255,255,.14)}
+  .itin-meta b{color:var(--gold-bright)}
+  .tour-note{background:rgba(18,16,14,.5);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);border-left:2px solid var(--gold)}
+  .tour-note p{color:rgba(219,208,192,.8)}
+
+  /* ===== footer 對齊首頁：透明透出森林 + 淺字 ===== */
+  .dark-lux{background:transparent!important;border:none!important}
+  .footer-grid p{color:var(--paper-dim)}
+  .footer-grid .logo,.footer-grid .logo .cn2{color:var(--paper)}
+  .footer-grid a{color:var(--paper-dim)}
+  .footer-legal p{color:#9a9184}
+  /* ===== 探索世界 下拉選國家（照搬首頁）===== */
+  .nav-dd{position:relative}
+  .nav-dd::after{content:"";position:absolute;top:100%;left:-10px;right:-10px;height:20px}
+  .nav-dd-menu{position:absolute;top:calc(100% + 18px);left:50%;transform:translateX(-50%) translateY(8px);min-width:212px;background:rgba(20,17,14,.97);backdrop-filter:blur(12px);border:1px solid rgba(201,166,120,.25);padding:10px 0;opacity:0;visibility:hidden;transition:opacity .32s var(--ease-expo),transform .32s var(--ease-expo);z-index:300;box-shadow:0 24px 60px -24px rgba(0,0,0,.7)}
+  .nav-dd:hover .nav-dd-menu{opacity:1;visibility:visible;transform:translateX(-50%) translateY(0)}
+  .nav-dd-menu a{display:block;padding:10px 24px;font-size:14px;letter-spacing:.12em;color:var(--paper-dim)!important;transition:background .25s,color .25s}
+  .nav-dd-menu a::after{display:none!important}
+  .nav-dd-menu a:hover{background:rgba(201,166,120,.14);color:var(--gold-bright)!important}
+
+  /* ===== 入住 飯店區 ===== */
+  .stay{display:flex;flex-direction:column;gap:var(--s6);max-width:1080px;margin:0 auto}
+  .hotel{display:grid;grid-template-columns:1.25fr 1fr;gap:var(--s5);align-items:center;background:rgba(18,16,14,.52);backdrop-filter:blur(7px);-webkit-backdrop-filter:blur(7px);border:1px solid rgba(230,199,156,.16);border-radius:4px;padding:clamp(16px,2.4vw,26px)}
+  .hotel:nth-child(even) .hotel-gal{order:2}
+  .hotel-gal{display:grid;grid-template-columns:repeat(2,1fr);gap:7px}
+  .hotel-gal img{width:100%;aspect-ratio:3/2;object-fit:cover;border-radius:3px;display:block}
+  .hotel-gal img:first-child{grid-column:1 / -1;aspect-ratio:16/9}
+  .hotel-info .hotel-n{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold)}
+  .hotel-info h3{font-family:"Cormorant Garamond",serif;font-weight:400;font-size:clamp(21px,2.3vw,29px);color:var(--paper);margin:8px 0 4px;line-height:1.22}
+  .hotel-info .hotel-loc{color:var(--gold-bright);font-size:14px;letter-spacing:.08em;margin-bottom:12px}
+  .hotel-info p{color:rgba(219,208,192,.78);font-size:14.5px;line-height:1.9}
+  @media(max-width:760px){.hotel{grid-template-columns:1fr}.hotel:nth-child(even) .hotel-gal{order:0}}
+</style>
+</head>
+<body>
+<div class="page-bg"><div class="pb-forest"></div><div class="pb-veil"></div><div class="pb-fog"></div></div>
+
+<nav id="nav" class="over-hero">
+  <a href="index.html" class="logo"><span class="mark">角</span><span class="cn2">落</span><span class="dot">·</span><span class="en">Corner</span></a>
+  <div class="nav-links">
+    <div class="nav-dd">
+      <a class="nav-dd-t" href="index.html#trips">探索世界</a>
+      <div class="nav-dd-menu">
+        <a href="destination-vietnam.html">越南 · Vietnam</a>
+        <a href="moments.html">峇里 · Bali</a>
+        <a href="tour-fuji.html">日本 · Japan</a>
+        <a href="moments.html">泰國 · Thailand</a>
+        <a href="moments.html">韓國 · Korea</a>
+        <a href="moments.html">中國 · China</a>
+        <a href="moments.html">埃及 · Egypt</a>
+      </div>
+    </div>
+    <a href="index.html#why">關於角落</a>
+    <a href="index.html#how">訂製行程</a>
+    <a href="index.html#trips">正在出發</a>
+    <a href="index.html#contact">聯絡</a>
+    <a href="index.html#contact" class="nav-cta">預約諮詢</a>
+  </div>
+  <button class="nav-toggle" aria-label="選單"><span></span><span></span><span></span></button>
+</nav>
+<div class="nav-menu">
+  <a href="moments.html">探索世界</a><a href="index.html#why">關於角落</a><a href="index.html#how">訂製行程</a><a href="index.html#trips">正在出發</a><a href="index.html#contact">聯絡</a><a href="index.html#contact">預約諮詢</a>
+</div>
+
+<!-- ===== HERO ===== -->
+<header class="hero">
+  <div class="hero-scrim"></div>
+  <div class="hero-inner wrap">
+    <div class="kicker">PRIVATE JOURNEY<span class="sep"></span><span class="cn">日本・福岡</span></div>
+    <h1><span class="en">Fukuoka</span><span class="cn">福岡 私人訂製之旅</span></h1>
+    <p class="hero-lead">博多市區精品飯店與糸島海濱別墅各兩晚，揉合城市風味、海岸風光與一場酣暢的高爾夫。全程私人包團，為您與家人量身安排節奏。</p>
+    <div class="hero-facts">
+      <span><b>住宿</b>市區精品 + 海濱別墅</span>
+      <span><b>主題</b>城市・海岸・高爾夫</span>
+      <span><b>形式</b>私人包團</span>
+    </div>
+  </div>
+</header>
+
+<!-- ===== 富士山位置 ===== -->
+<section class="fuji-loc">
+  <div class="wrap">
+    <div class="loc-text reveal" data-reveal-title>
+      <div class="kicker">LOCATION<span class="sep"></span><span class="cn">福岡在這裡</span></div>
+      <h2 class="display">On the map</h2>
+      <span class="h2cn">九州北端・博多市區與糸島海岸</span>
+      <p>福岡位於九州北端，是通往日本西部的門戶。市區的博多繁華便利，車程約 40 分鐘的糸島則有綿延海岸與海濱別墅。這趟行程在兩地各住兩晚，城市與海景兼得。</p>
+    </div>
+    <div class="fuji-map reveal"><svg class="fuji-map-svg" viewBox="814 311.9 78.2 89.2" aria-hidden="true"><path d="m 878.53675,325.4254 0.352,0.02 0.157,-0.018 0.269,0.059 1.067,0.591 0.322,0.075 0.333,0.009 0.234,-0.048 0.206,-0.162 0.644,-0.717 0.678,-0.655 0.075,0.025 0,0.181 -0.05,0.201 -0.3,0.599 -0.333,0.804 -0.071,0.406 0.108,0.395 0.209,0.326 0.165,0.445 0.19,0.617 0.268,0.078 0.146,0.009 0.268,-0.185 0.253,-0.235 0.218,-0.029 0.229,0.04 -0.301,0.164 -0.284,0.2 -0.244,0.378 -0.091,0.071 -0.281,-0.023 -0.161,0.014 -0.329,0.158 -0.289,0.179 -0.276,0.219 -0.301,0.117 -0.321,0.028 -0.495,0.179 -0.321,0.013 -0.603,-0.156 -0.293,0.042 -0.639,0.352 -0.582,0.508 -0.509,0.569 -0.425,0.682 -0.171,0.354 -0.103,0.396 -0.014,0.262 -0.038,0.251 -0.098,0.175 -0.118,0.142 -0.351,-0.083 -0.576,-0.362 -1.117,-0.527 -1.18,-0.809 -0.664,-0.407 -1.248,0.122 -1.181,0.776 -0.105,-0.066 -0.451,-0.532 -0.219,-0.211 -0.261,-0.06 -0.194,0.007 -0.188,0.039 -0.267,0.274 -0.098,0.197 -0.076,0.224 -0.023,0.158 0.032,0.155 0.253,0.35 0.312,0.26 0.141,0.049 0.299,-0.018 0.139,0.027 0.501,0.521 0.549,0.488 0.121,0.161 -0.203,0.169 -0.222,0.084 -0.259,-0.021 -0.256,-0.064 -0.438,-0.207 -0.188,0.176 -0.292,0.361 -0.161,0.392 -0.131,0.179 -0.322,0.236 -0.341,0.122 -0.179,-0.04 -0.136,-0.148 -0.077,-0.177 -0.039,-0.206 0.072,-0.446 0.177,-0.403 0.068,-0.412 -0.145,-0.581 -0.092,-0.122 -0.362,-0.341 -0.168,-0.333 -0.04,-0.415 0.021,-0.229 0.088,-0.507 0.088,-0.256 0.166,-0.084 0.182,-0.051 0.279,-0.184 0.307,-0.238 0.294,-0.272 0.291,-0.333 0.151,-0.366 -0.249,-0.45 -0.052,-0.268 0.037,-0.253 0.266,-0.135 0.273,0.102 0.551,0.372 0.107,0.037 0.378,0.017 0.518,0.081 0.3,-0.02 0.145,-0.056 0.218,-0.307 0.107,-0.392 -0.039,-0.505 -0.002,-0.502 0.138,-0.41 0.432,-0.661 0.124,-0.39 0.045,-0.952 0.156,-0.42 0.125,-0.437 0.06,-0.918 -0.177,-0.886 -0.178,-0.436 -0.204,-0.415 0.03,-0.397 0.165,-0.369 0.004,-0.111 0.039,-0.099 0.309,-0.07 0.145,-0.079 0.139,-0.178 0.165,-0.104 0.121,0.104 0.1,0.182 0.436,0.447 0.687,0.796 0.809,1.209 0.507,0.587 0.534,0.531 0.599,0.542 0.627,0.465 0.4,0.22 0.293,0.35 0.181,0.057 z m -7.723,-4.787 -0.108,0.252 -0.146,-0.375 -0.029,-0.405 0.084,0.002 0.154,0.061 0.037,0.197 0.008,0.268 z m 0.625,0.848 -0.194,0.028 -0.227,-0.166 -0.028,-0.208 0.164,-0.166 0.163,0.061 0.163,0.214 0.054,0.112 -0.095,0.125 z m -5.091,11.738 -0.064,0.02 -0.066,-0.032 -0.065,-0.285 0.056,-0.15 0.181,-0.105 0.176,-0.029 -0.149,0.524 -0.069,0.057 z m 4.906,2.653 0.11,0.07 0.524,-0.189 -0.1,0.571 -0.056,0.575 0.038,0.952 0.047,0.428 0.091,0.414 0.224,0.296 0.292,0.21 0.423,0.669 0.227,0.82 0.16,0.397 0.12,0.416 0.037,0.19 0.003,0.19 -0.036,0.26 0.04,0.21 -0.046,0.658 -0.189,0.759 -0.024,0.387 -0.165,0.077 -0.1,0.179 -0.085,0.083 -0.095,0.064 -0.137,0.016 -0.099,0.073 -0.039,0.205 -0.063,0.189 -0.12,0.175 -0.094,0.192 -0.077,0.468 -0.028,0.479 -0.115,0.334 -0.279,0.087 -0.319,-0.005 -0.409,0.154 -0.088,0.091 -0.323,0.582 -0.093,0.341 -0.003,0.366 0.09,0.45 0.122,0.439 0.092,0.815 -0.097,1.238 -0.094,0.395 -0.205,0.267 -0.156,0.124 -0.134,0.152 -0.174,0.401 -0.288,0.798 -0.023,0.2 10e-4,0.207 -0.078,0.27 -0.05,0.265 0.047,0.308 0.089,0.288 0.386,0.737 0.151,0.218 0.17,0.198 -0.659,0.219 -0.118,0.101 -0.392,0.418 -0.125,0.396 0.01,0.438 -0.065,0.157 -0.107,0.136 -0.112,0.09 -0.438,0.2 -0.28,0.199 -0.278,0.311 -0.11,0.162 -0.215,-0.052 -0.126,-0.144 0.124,-0.18 -0.038,-0.213 0.061,-0.547 -0.069,-0.22 0.224,-0.167 0.106,-0.266 0.232,-0.213 0.167,-0.189 0.029,-0.154 -0.149,-0.166 -0.158,-0.12 -0.218,0 -0.21,0.035 -0.137,0.158 -0.045,0.215 0.011,0.1 -0.018,0.087 -0.33,0.294 0.043,0.307 0.097,0.156 0.124,0.074 -0.037,0.105 -0.157,0.247 -0.109,0.024 -0.201,-0.346 -0.252,-0.189 -0.312,10e-4 -0.32,0.069 -0.243,0.23 -0.08,0.191 -0.052,0.197 0.018,0.479 -0.101,0.4 -0.198,0.351 -0.092,0.128 -0.241,0.238 -0.167,0.031 -0.118,-0.108 -0.096,-0.164 0.122,-0.6 -0.005,-0.338 0.282,-0.172 -0.231,-0.24 -0.284,-0.097 -0.399,0.128 -0.113,0.145 -0.077,0.194 -0.215,0.246 -0.236,0.229 -0.269,0.392 -0.18,0.463 -0.59,-0.151 -0.321,-0.034 -0.325,0.012 -0.576,-0.057 -0.632,0.095 -0.72,0.182 0.043,-0.131 0.592,-0.279 0.021,-0.082 -0.057,-0.153 -0.147,-0.007 -0.354,0.053 -0.181,-0.023 -0.073,-0.164 -0.12,-0.07 -0.08,0.067 0.026,0.318 -0.087,0.042 -0.117,-0.082 0.037,-0.248 -0.079,-0.363 -0.01,-0.226 0.124,-0.194 -0.127,-0.082 -0.134,0.031 -0.17,0.093 -0.15,0.132 -0.317,0.663 -0.123,0.378 0.232,0.303 0.634,0.423 0.108,0.104 0.002,0.18 -0.077,0.191 -0.172,0.083 -0.695,0.141 -0.603,0.273 -0.174,0.276 -0.548,1.066 -0.439,0.727 -0.62,0.25 -0.68,-0.223 -0.165,-0.253 -0.133,-0.313 -0.253,-0.283 -0.229,-0.309 -0.133,-0.367 0.021,-0.592 -0.099,-0.357 0.089,-0.095 0.375,-0.218 0.123,-0.122 0.212,-0.284 0.076,-0.158 0.011,-0.239 -0.17,-0.125 -0.44,0.004 -0.439,0.075 -0.313,-0.104 -0.407,-0.29 -0.126,-0.062 -0.438,-0.018 -0.313,0.054 -0.307,0.105 -0.325,0.034 -0.108,0.055 -0.375,0.355 -0.299,0.223 -0.258,0.111 -0.557,0.029 -0.279,0.072 -0.292,0.117 -0.082,-0.01 -0.308,0.162 -0.354,0.14 -0.188,0.14 -0.347,-0.092 -0.686,0.251 -0.332,0.031 -0.342,-0.139 -0.318,-0.225 -0.305,0.097 -0.209,0.331 -0.102,0.658 -0.119,0.296 -0.036,0.355 -0.158,-0.056 -0.918,-0.639 -0.063,-0.023 -0.742,0.11 -0.191,0.053 -0.239,0.129 -0.253,0.058 -0.23,-0.093 -0.221,-0.151 -0.212,0.045 -0.217,0.106 -0.084,-0.966 0.043,-0.127 0.133,-0.169 0.147,-0.145 0.359,-0.05 0.363,0.047 0.26,-0.066 0.22,-0.192 0.231,-0.272 0.261,-0.222 0.354,-0.175 0.342,-0.201 0.301,-0.282 0.285,-0.309 0.262,-0.227 0.285,-0.19 0.434,-0.458 0.575,-0.515 0.221,-0.382 0.137,-0.105 0.495,-0.213 0.657,-0.164 0.31,0.008 0.306,0.335 0.165,-0.046 0.168,-0.087 0.338,-0.048 0.348,0.056 0.34,0.001 0.34,-0.042 0.652,-0.11 0.344,-0.133 0.336,-0.172 1.196,-0.121 0.819,-0.289 0.13,0.021 0.126,0.066 0.01,0.214 -0.104,0.233 0.101,0.141 0.166,0.087 0.771,0.027 0.22,0.05 0.322,-0.159 0.304,-0.197 0.317,-0.26 0.222,-0.293 -0.205,-0.367 -0.045,-0.402 0.172,-0.437 0.249,-0.368 0.296,-0.223 0.273,-0.257 0.552,-0.73 0.399,-0.592 0.144,-0.73 -0.084,-0.866 0.349,-0.646 0.334,-0.111 0.663,-0.295 0.348,-0.086 0.052,0.129 -0.01,0.169 -0.521,0.542 -0.299,0.223 -0.178,0.069 -0.164,0.098 -0.067,0.191 0.266,0.318 0.067,0.235 -0.017,0.225 0.012,0.203 0.3,0.22 0.345,0.073 0.144,-0.002 0.126,-0.058 0.394,-0.539 0.088,-0.094 1.12,-0.396 0.551,-0.303 0.305,-0.079 0.286,-0.158 0.642,-0.61 0.236,-0.282 0.215,-0.312 0.172,-0.363 0.136,-0.393 0.186,-0.245 1.017,-0.585 0.327,-0.319 0.104,-0.155 0.126,-0.449 0.087,-0.467 0.123,-0.367 0.167,-0.344 0.223,-0.351 0.251,-0.327 0.148,-0.335 0.216,-0.803 0.094,-0.446 0.074,-0.161 0.108,-0.135 0.094,-0.172 0.072,-0.192 0.033,-0.19 0.046,-0.582 -0.028,-0.454 -0.168,-0.385 -0.139,-0.109 -0.151,-0.006 -0.228,0.033 -0.193,-0.157 0.04,-0.139 0.197,-0.026 0.134,-0.072 0.097,-0.131 0.181,-0.421 0.108,-0.452 0.01,-0.2 -0.142,-0.365 -0.112,-0.439 -0.003,-0.237 0.123,-0.274 0.176,-0.223 0.157,-0.052 0.17,-0.016 0.155,-0.086 0.144,-0.125 0.081,-0.138 0.126,-0.376 0.049,-0.214 -0.08,-0.576 0.082,-0.158 0.116,-0.098 0.155,0.074 0.16,0.015 0.186,-0.023 0.178,0.061 0.033,0.148 0.112,0.972 0.064,0.131 0.13,0.102 0.146,-0.015 0.126,-0.151 0.085,-0.201 0.168,-0.042 0.513,0.216 0.182,-0.154 0.118,-0.239 0.103,-0.423 -0.05,-0.382 -0.123,-0.142 -0.127,0.025 -0.112,0.105 -0.126,0.057 -0.757,0.201 0.004,-0.426 0.162,-0.64 0.089,-0.203 0.128,-0.096 0.318,0.112 0.155,0.074 0.339,0.318 z m -8.098,12.885 -0.267,0.009 -0.066,-0.035 0.161,-0.088 0.015,-0.147 0.097,-0.262 -0.002,-0.075 -0.212,-0.014 0.011,-0.297 0.158,-0.294 0.435,-0.463 0.119,-0.087 0.018,0.203 -0.132,0.479 -0.026,0.173 0.342,0.036 -0.22,0.573 -0.431,0.289 z m -13.958,5.664 -0.128,0.129 -0.24,-0.042 -0.139,-0.187 0.046,-0.211 0.251,-0.162 0.24,0.325 -0.03,0.148 z m 17.08,5.069 -0.03,0.16 -0.149,-0.035 -0.071,-0.104 0.009,-0.187 0.157,-0.001 0.084,0.167 z m -28.264,1.264 -0.057,0.163 -0.19,-0.115 -0.087,-0.104 0.177,-0.513 -0.021,-0.195 0.011,-0.095 0.351,-0.269 0.061,0.051 0.021,0.075 -0.031,0.115 0.018,0.254 -0.264,0.42 0.011,0.213 z m 15.569,0.221 -0.304,0.288 -0.264,-0.02 -0.132,-0.129 -0.044,-0.159 0.251,-0.25 0.216,-0.354 0.196,-0.157 0.158,-0.088 0.124,0.003 -0.278,0.494 0.077,0.372 z m -1.631,-0.661 -0.052,0.067 -0.05,-0.018 -0.179,0.155 -0.038,-0.149 -0.141,-0.099 -0.017,-0.078 0.403,-0.051 0.13,0.041 -0.056,0.132 z m 0.015,0.769 0.389,0.141 0.397,-0.04 -0.006,0.617 0.057,0.207 0.111,0.185 -0.057,0.269 0.18,0.092 -0.534,0.306 -0.481,0.406 -0.198,0.273 -0.179,0.293 -0.104,0.31 -0.067,0.333 -0.161,-0.132 -0.464,-0.541 -0.294,-0.148 -0.473,-0.079 -0.15,0.018 -0.972,0.505 -0.129,0.369 -0.265,0.555 -0.126,0.183 -0.14,0.053 -0.099,0.095 -0.108,0.472 -0.301,0.29 -0.185,0.009 -0.314,-0.08 -0.142,0.045 0.188,-0.465 -0.3,-0.057 -0.301,0.01 -0.007,-0.303 -0.182,-0.172 0.135,-0.224 0.004,-0.183 0.079,-0.101 0.027,-0.147 -0.011,-0.126 -0.185,-0.038 -0.113,-0.089 0.021,-0.332 -0.106,-0.012 -0.264,0.058 -0.548,0.256 -0.149,0 0.229,-0.183 0.487,-0.25 0.219,-0.144 0.478,-0.404 0.301,-0.191 0.156,-0.339 0.049,-0.206 0.102,-0.182 0.09,-0.291 0.154,-0.097 0.269,-0.25 0.154,0.024 0.172,0.307 0.231,0.235 0.166,-0.02 0.297,-0.121 0.144,-0.027 0.343,0.015 0.309,-0.149 0.126,-0.176 0.047,-0.22 -0.115,-0.369 0.148,0.037 0.143,-0.015 0.335,-0.235 0.345,-0.14 0.357,-0.035 0.402,0.133 0.389,0.212 z m -14.25,0.449 -0.183,0.137 -0.078,-0.209 0.08,-0.594 0.343,0.122 -0.006,0.182 -0.156,0.362 z m 9.258,0.028 -0.081,0.135 -0.249,-0.041 0.1,-0.117 0.076,-0.142 0.056,-0.029 0.047,0.154 0.051,0.04 z m -0.877,0.573 0.137,0.124 0.325,-0.05 0.04,0.035 -0.095,0.112 -0.144,0.111 -0.26,-0.083 -0.164,-0.004 -0.023,-0.185 0.021,-0.067 0.163,0.007 z m -3.062,1.151 0.377,0.1 0.16,0.006 0.147,-0.045 0.226,-0.131 0.235,-0.097 0.169,0.049 0.149,0.117 0.078,0.165 -0.038,0.172 -0.267,0.37 -0.22,0.394 0.504,0.074 0.504,-0.008 -0.117,0.243 -0.02,0.212 0.154,0.101 0.131,0.136 -0.034,0.123 -0.075,0.121 0.275,0.182 -0.018,0.122 -0.071,0.128 -0.687,0.834 -0.202,0.421 -0.14,0.463 -0.129,0.338 -0.094,0.351 -0.071,0.378 -0.128,0.39 0.043,0.345 -0.043,0.354 -0.345,0.872 -0.246,-0.016 -0.309,-0.105 -0.193,0.016 -0.1,0.193 0.177,0.397 -0.55,0.471 -0.608,0.316 -0.004,-0.144 0.058,-0.113 0.087,-0.091 0.063,-0.11 0.089,-0.37 -0.044,-0.373 -0.184,-0.468 -0.013,-0.168 0.127,-0.068 0.085,-0.02 0.046,-0.065 0.002,-0.155 -0.058,-0.115 -0.174,-0.037 -0.166,-0.002 -0.117,0.174 -0.161,0.335 -0.078,0.339 0.034,0.185 0.071,0.166 0.221,0.277 -0.064,0.164 -0.092,0.127 -0.78,-0.289 -0.169,-0.021 -0.14,-0.061 -0.15,-0.381 0.318,-0.092 0.094,-0.046 0.035,-0.122 0.043,-0.372 -0.148,-0.312 -0.126,-0.111 -0.102,-0.127 0.064,-0.263 -0.042,-0.332 -0.004,-0.464 0.055,-0.08 0.295,-0.094 0.213,-0.249 0.188,-0.284 0.275,-0.5 0.226,-0.541 -0.217,-0.023 -0.184,-0.102 0.2,-0.256 -0.062,-0.324 -0.3,-0.398 -0.165,-0.47 -0.265,-0.208 -0.14,-0.076 -0.171,0.11 -0.14,0.132 0.13,0.306 -0.016,0.271 0.021,0.268 0.132,0.015 0.163,-0.067 0.13,0.047 0.076,0.141 0.021,0.181 -0.058,0.179 -0.119,0.089 -0.146,-0.007 -0.147,-0.097 -0.115,-0.138 -0.275,-0.076 -0.29,0.163 -0.275,0.332 -0.235,0.168 0.11,-0.246 0.053,-0.266 -0.114,-0.187 -0.27,-0.311 -0.063,-0.18 -0.016,-0.218 0.048,-0.216 0.276,0.248 0.142,0.309 0.204,0.136 0.255,0.001 -0.196,-0.454 -0.07,-0.115 -0.274,-0.204 -0.376,-0.343 -0.238,-0.166 0.084,-0.359 0.141,-0.071 0.118,0.017 0.398,0.127 0.037,-0.179 -0.059,-0.096 -0.03,-0.111 0.263,-0.155 0.429,-0.128 0.088,-0.06 0.076,-0.129 0.105,-0.067 0.3,0.002 0.253,-0.124 0.209,-0.335 0.05,-0.184 0.074,-0.154 0.521,-0.272 0.129,-0.042 0.349,0.034 0.318,0.154 0.157,0.324 0.138,0.346 0.331,0.235 z m -3.87,-0.491 -0.194,0.139 -0.146,-0.108 0.071,-0.3 0.048,-0.1 0.166,0.099 0.055,0.27 z m -0.854,1.762 -0.197,0.157 -0.143,0 0.13,-0.184 0.018,-0.087 0.109,-0.247 0.213,-0.088 0.09,-0.011 -0.174,0.256 -0.046,0.204 z m -1.164,1.274 -0.07,0.036 -0.09,-0.3 -0.063,-0.107 0.105,-0.057 0.211,-0.545 0.038,0.216 0.082,0.214 0.082,0.034 -0.08,0.156 -0.117,0.058 -0.098,0.295 z m 30.21,-0.718 -0.049,0.035 -0.135,-0.109 -0.02,-0.097 0.024,-0.06 0.088,-0.013 0.182,0.119 -0.09,0.125 z m -31.365,0.906 0.109,0.09 0.159,-0.051 0.127,-0.012 0.091,0.043 0.115,0.231 0.042,0.137 -0.205,0.019 -0.087,0.032 -0.112,0.167 -0.161,-0.062 -0.101,-0.079 -0.022,-0.111 0.045,-0.404 z m 3.977,1.835 -0.222,0.118 -0.028,-0.113 -0.094,-0.052 0.161,-0.159 -0.006,-0.072 -0.102,-0.107 0.118,-0.406 -0.032,-0.175 0.443,-0.065 0.081,0.165 0.008,0.5 -0.327,0.366 z m 0.838,-0.641 -0.248,0.015 -0.103,-0.039 -0.041,-0.105 0.348,-0.213 0.27,0.038 -0.12,0.192 -0.106,0.112 z m -1.86,2.526 -0.088,0.057 0.056,-0.258 0.226,-0.226 0.019,0.146 -0.213,0.281 z m 3.484,4.107 -0.246,0.034 -0.005,-0.188 0.195,-0.424 0.021,-0.312 0.182,-0.394 0.077,-0.086 0.058,-0.031 0.063,0.123 -0.07,0.482 -0.183,0.365 -0.092,0.431 z m -0.945,0.433 -0.321,0.07 -0.176,-0.075 -0.162,-0.399 0.307,-0.25 0.41,0.248 0.084,0.071 -0.142,0.335 z m -3.284,6.573 -0.242,0.257 -0.257,-0.232 -0.31,-0.155 0.147,-0.042 0.086,-0.063 0.009,-0.098 0.201,-0.146 0.398,-0.113 0.127,-0.007 0.143,-0.106 0.047,-0.096 0.059,-0.046 0.257,-0.132 0.07,0.152 -0.012,0.119 -0.193,0.066 -0.188,0.159 -0.175,0.198 -0.156,0.084 -0.05,0.056 0.039,0.145 z m -0.361,0.33 0.019,0.074 -0.275,-0.062 -0.112,-0.289 0.183,0.052 0.056,0.099 0.129,0.126 z m -0.915,1.213 -0.118,0.058 -0.157,-0.08 -0.049,-0.362 0.07,-0.176 0.123,-0.039 0.107,0.313 0.074,0.129 -0.05,0.157 z m -2.075,3.352 -0.271,0.144 -0.1,0.171 -0.25,0.058 -0.243,0.24 -0.236,0.043 0.006,0.193 0.101,0.163 -0.157,0.029 -0.165,0.199 -0.013,0.145 0.059,0.116 -0.008,0.059 -0.208,0.172 -0.215,0.008 -0.009,-0.186 0.014,-0.139 0.203,-0.338 0.005,-0.393 0.188,-0.045 0.068,-0.055 0.297,-0.28 0.055,-0.119 -0.154,-0.116 0.012,-0.137 0.035,-0.058 0.244,0.044 0.099,0.102 0.049,0.011 0.143,-0.076 0.067,-0.136 0.266,-0.268 0.108,-0.266 0.215,0.218 -0.058,0.286 -0.147,0.211 z m 39.093,0.114 -0.052,0.002 -0.176,-0.331 0.051,-0.016 0.103,0.052 0.113,0.191 -0.039,0.102 z m -46.992,5.802 -0.237,0.08 -0.254,-0.047 0.041,-0.429 0.088,0.06 0.055,0.146 0.189,0.086 0.118,0.104 z m -3.231,0.698 -0.165,0.484 -0.137,0.07 -0.14,-0.039 -0.144,-0.27 0.101,-0.104 0.14,0.055 0.113,-0.021 0.257,-0.394 0.062,0.064 -0.087,0.155 z m -1.134,0.722 -0.177,0.043 -0.213,-0.053 -0.194,-0.015 -0.002,-0.091 0.203,-0.094 0.004,-0.131 0.05,-0.071 0.459,0.161 -0.02,0.118 -0.11,0.133 z"/><g class="cm-pin" transform="translate(840.8,364.1)"><circle class="ring" r="2.66"/><circle class="dot" r="1.4"/><text class="lbl" x="-15" y="0.3">福岡</text></g></svg></div>
+  </div>
+</section>
+
+
+<!-- ===== 入住 ===== -->
+<section class="sec">
+  <div class="wrap">
+    <div class="sec-head reveal" data-reveal-title>
+      <div class="kicker">STAY<span class="sep"></span><span class="cn">入住</span></div>
+      <h2 class="display">Where you stay</h2>
+      <span class="h2cn">四晚兩處，市區精品與海濱別墅</span>
+    </div>
+    <div class="stay">
+      <article class="hotel reveal">
+        <div class="hotel-gal">
+        <img src="assets/photos/fukuoka/gate-room-1.webp" alt="THE GATE HOTEL FUKUOKA 房間" loading="lazy">
+        <img src="assets/photos/fukuoka/gate-room-2.webp" alt="THE GATE HOTEL FUKUOKA 房間" loading="lazy">
+        <img src="assets/photos/fukuoka/gate-room-3.webp" alt="THE GATE HOTEL FUKUOKA 房間" loading="lazy">
+        </div>
+        <div class="hotel-info">
+          <span class="hotel-n">第 1–2 晚</span>
+          <h3>THE GATE HOTEL FUKUOKA by HULIC</h3>
+          <p class="hotel-loc">福岡市・博多</p>
+          <p>坐落博多核心、緊鄰中洲與運河城，精品設計與絕佳地段，逛街、美食、交通一步到位。（飯店介紹可再補充）</p>
+        </div>
+      </article>
+      <article class="hotel reveal">
+        <div class="hotel-gal">
+        <img src="assets/photos/fukuoka/sevenxseven-1.webp" alt="SEVEN X SEVEN ITOSHIMA" loading="lazy">
+        <img src="assets/photos/fukuoka/sevenxseven-2.webp" alt="SEVEN X SEVEN ITOSHIMA" loading="lazy">
+        <img src="assets/photos/fukuoka/sevenxseven-3.webp" alt="SEVEN X SEVEN ITOSHIMA" loading="lazy">
+        <img src="assets/photos/fukuoka/sevenxseven-4.webp" alt="SEVEN X SEVEN ITOSHIMA" loading="lazy">
+        </div>
+        <div class="hotel-info">
+          <span class="hotel-n">第 3–4 晚</span>
+          <h3>SEVEN X SEVEN ITOSHIMA</h3>
+          <p class="hotel-loc">糸島・海濱別墅</p>
+          <p>糸島海岸線上的私人別墅式住宿，面海、靜謐、適合放慢步調，享受私人空間與海景。（飯店介紹可再補充）</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 高爾夫 ===== -->
+<section class="sec">
+  <div class="wrap">
+    <div class="sec-head reveal" data-reveal-title>
+      <div class="kicker">GOLF<span class="sep"></span><span class="cn">高爾夫</span></div>
+      <h2 class="display">On the green</h2>
+      <span class="h2cn">光明頂福岡高爾夫俱樂部</span>
+    </div>
+    <div class="tour-note reveal"><p>＊球場介紹與照片待補（請提供球場資料 / 圖片 / 安排哪一天）。</p></div>
+  </div>
+</section>
+
+<!-- ===== 行程 ===== -->
+<section class="sec">
+  <div class="wrap">
+    <div class="sec-head reveal" data-reveal-title>
+      <div class="kicker">ITINERARY<span class="sep"></span><span class="cn">每日行程</span></div>
+      <h2 class="display">Day by day</h2>
+      <span class="h2cn">每日安排，待您提供後補上</span>
+    </div>
+    <div class="itin reveal">
+      <p style="color:rgba(219,208,192,.8);font-size:15px;line-height:1.9;margin:0">＊每日行程（Day 1–4）等您給內容後，我會用富士山頁同款逐日卡片排上。目前已就位：飯店兩處、地圖定位、高爾夫區塊。</p>
+    </div>
+    <div class="tour-cta reveal" style="margin-top:var(--s6)">
+      <a class="btn-primary" href="mailto:sales@cornertravel.com.tw">與顧問聯繫</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer dark-lux" id="contact">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <a href="index.html" class="logo"><span class="mark">角</span><span class="cn2">落</span><span class="dot">·</span><span class="en">Corner</span></a>
+        <p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:17px;line-height:1.7;color:var(--gold-bright);margin-bottom:16px">如果可以，讓我們一同探索世界上每個角落。</p>
+        <p>角落旅行社 CORNER TRAVEL／專注私人客製化小包團，為你留下世界上那些拼團去不了的角落。</p>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <p>10350 台北市大同區重慶北路一段67號8樓之2</p>
+        <p><a href="tel:+886277516051,9">02-7751-6051 #9</a></p>
+        <p>傳真 02-2552-1332</p>
+        <p><a href="mailto:sales@cornertravel.com.tw">sales@cornertravel.com.tw</a></p>
+      </div>
+      <div>
+        <h4>Follow</h4>
+        <p><a href="https://www.instagram.com/cornertravel.w/" target="_blank" rel="noopener">IG ＠cornertravel.w</a></p>
+        <p><a href="https://www.facebook.com/corner.travel.w" target="_blank" rel="noopener">FB 角落旅行社</a></p>
+        <p><a href="https://lin.ee/Vwe6iYU" target="_blank" rel="noopener">LINE 線上諮詢</a></p>
+      </div>
+    </div>
+    <div class="footer-legal">
+      <p>© 2025 角落旅行社 CORNER TRAVEL．台北</p>
+      <p>角落旅行社股份有限公司　統一編號 83212711</p>
+      <p>交觀甲06015　品保協會 北2551</p>
+    </div>
+  </div>
+</footer>
+
+<script src="corner.js"></script>
+  <script src="chat-widget.js" data-site-key="wsc_dce1a4c06f9c3dbf463454258e368ea0" data-endpoint="https://erp.venturo.tw/api/website/chat" defer></script>
+</body>
+</html>
