@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>斜切「為什麼」區塊 — 3 種方案比較 · 角落 CORNER</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=Noto+Serif+TC:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="corner.css">
+<style>
+/* ===== 樣張頁：3 種「左標題 + 右斜切圖塊（字在圖裡）」方案比較 ===== */
+.page-head{padding:140px 0 40px}
+.page-head h1{font-family:"Cormorant Garamond",serif;font-weight:400;font-size:clamp(40px,5vw,68px);line-height:1.0;color:var(--paper)}
+.page-head .h1cn{display:block;font-family:"Noto Serif TC",serif;font-weight:500;font-size:24px;color:var(--gold-bright);margin-top:14px;letter-spacing:.06em}
+.page-head .lead{margin-top:20px;font-size:18px;color:var(--paper-dim);max-width:38em;line-height:1.9}
+
+.variant{padding:84px 0;border-top:1px solid var(--line)}
+.variant > .wrap > .vtag{font-family:"Cormorant Garamond",serif;font-weight:500;text-transform:uppercase;letter-spacing:.3em;font-size:12px;color:var(--gold);margin-bottom:40px;display:flex;align-items:center;gap:16px}
+.variant > .wrap > .vtag b{font-family:"Noto Serif TC",serif;font-weight:500;font-size:20px;letter-spacing:.08em;color:var(--paper);text-transform:none}
+
+/* 左右版面 */
+.vlayout{display:grid;grid-template-columns:.82fr 1.18fr;gap:var(--s7);align-items:center}
+.why-title h2{font-family:"Cormorant Garamond",serif;font-weight:400;font-size:clamp(42px,4.4vw,58px);line-height:1.02;letter-spacing:-.01em;color:var(--paper)}
+.why-title .h2cn{display:block;font-family:"Noto Serif TC",serif;font-weight:500;font-size:26px;letter-spacing:.05em;color:var(--paper);margin-top:14px}
+.why-title .lead{margin-top:22px;font-size:17px;line-height:1.95;color:var(--paper-dim);max-width:24em}
+
+/* 共用：圖塊內的文字 */
+.ptile .pnum{font-family:"Cormorant Garamond",serif;font-weight:300;font-size:46px;line-height:1;color:var(--gold-bright);opacity:.92}
+.ptile h3{font-family:"Noto Serif TC",serif;font-weight:500;font-size:22px;letter-spacing:.04em;color:var(--paper);margin:10px 0 8px}
+.ptile p{font-family:"Noto Serif TC",serif;font-weight:400;font-size:14.5px;line-height:1.8;color:var(--paper-dim);max-width:22em}
+.ptile img{width:100%;height:100%;object-fit:cover;filter:saturate(.9) contrast(1.05) brightness(.78) sepia(.05)}
+
+/* ---------- 方案 A：斜切橫帶疊置（clip-path 平行四邊形，溫和、編輯感） ---------- */
+.va .why-tiles{display:flex;flex-direction:column;gap:16px}
+.va .ptile{position:relative;height:188px;overflow:hidden;clip-path:polygon(5% 0,100% 0,95% 100%,0 100%);transition:clip-path .6s var(--ease-expo)}
+.va .ptile .ph{position:absolute;inset:0}
+.va .ptile .veil{position:absolute;inset:0;background:linear-gradient(105deg,rgba(16,12,8,.9) 0%,rgba(16,12,8,.55) 46%,rgba(16,12,8,.15) 100%)}
+.va .ptile .content{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;padding:0 9% 0 11%}
+.va .ptile:hover{clip-path:polygon(2% 0,100% 0,98% 100%,0 100%)}
+.va .ptile:hover img{transform:scale(1.05);transition:transform 1.4s var(--ease-expo)}
+
+/* ---------- 方案 B：斜切錯落卡（強斜度 + 對角錯落，動感） ---------- */
+.vb .why-tiles{display:flex;flex-direction:column;gap:22px}
+.vb .ptile{position:relative;height:206px;width:84%;overflow:hidden;clip-path:polygon(12% 0,100% 0,88% 100%,0 100%);
+  box-shadow:0 24px 60px -22px rgba(0,0,0,.8);transition:transform .6s var(--ease-expo)}
+.vb .ptile:nth-child(2){align-self:center}
+.vb .ptile:nth-child(3){align-self:flex-end}
+.vb .ptile .ph{position:absolute;inset:0}
+.vb .ptile .veil{position:absolute;inset:0;background:linear-gradient(100deg,rgba(16,12,8,.92) 0%,rgba(16,12,8,.5) 50%,transparent 100%)}
+.vb .ptile .content{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;padding:0 12% 0 16%}
+.vb .ptile:hover{transform:translateY(-6px)}
+.vb .ptile:hover img{transform:scale(1.06);transition:transform 1.4s var(--ease-expo)}
+
+/* ---------- 方案 C：skewX 平行四邊形（照片不變形 + 字直立，最圖像化） ---------- */
+.vc .why-tiles{display:flex;flex-direction:column;gap:18px;padding-left:24px}
+.vc .ptile{position:relative;height:200px;transform:skewX(-9deg);overflow:hidden;
+  outline:1px solid rgba(201,166,120,.2);box-shadow:0 22px 56px -24px rgba(0,0,0,.8)}
+.vc .ptile .ph{position:absolute;inset:-2px;transform:skewX(9deg) scale(1.26)}
+.vc .ptile .veil{position:absolute;inset:-2px;transform:skewX(9deg) scale(1.26);
+  background:linear-gradient(100deg,rgba(16,12,8,.9) 0%,rgba(16,12,8,.5) 48%,rgba(16,12,8,.12) 100%)}
+.vc .ptile .content{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;padding:0 10% 0 13%;transform:skewX(9deg)}
+/* 金角點綴（直立層）*/
+.vc .ptile .corner{position:absolute;top:14px;right:30px;width:22px;height:22px;border-top:1px solid var(--gold);border-right:1px solid var(--gold);transform:skewX(9deg);z-index:3}
+.vc .ptile:hover img{transform:scale(1.32);transition:transform 1.4s var(--ease-expo)}
+
+@media(max-width:900px){
+  .vlayout{grid-template-columns:1fr;gap:var(--s5)}
+  .vb .ptile,.vc .why-tiles{width:100%;padding-left:0}
+}
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <a href="index.html" class="logo"><span class="mark">角</span><span class="cn2">落</span><span class="dot">·</span><span class="en">Corner</span></a>
+  <div class="nav-links">
+    <a href="moments.html">目的地</a>
+    <a href="destination-vietnam.html">越南</a>
+    <a href="index.html#contact">聯絡</a>
+    <a href="index.html#contact" class="nav-cta">預約諮詢</a>
+  </div>
+  <button class="nav-toggle" aria-label="選單"><span></span><span></span><span></span></button>
+</nav>
+<div class="nav-menu">
+  <a href="moments.html">目的地</a><a href="destination-vietnam.html">越南</a><a href="index.html#contact">聯絡</a><a href="index.html#contact">預約諮詢</a>
+</div>
+
+<header class="page-head">
+  <div class="wrap">
+    <div class="kicker">PATTERN STUDY<span class="sep"></span><span class="cn">斜切「為什麼」區塊</span></div>
+    <h1 style="margin-top:20px">Why-section, three slants
+      <span class="h1cn">「左標題 + 右斜切圖塊・字在圖裡」三種方案</span>
+    </h1>
+    <p class="lead">同一組「為什麼越南選我們」內容，三種斜切排法。選定一種，我就套進越南頁與首頁的「為什麼」區塊。</p>
+  </div>
+</header>
+
+<!-- ============ 方案 A ============ -->
+<section class="variant va">
+  <div class="wrap">
+    <div class="vtag">Option A<span class="sep" style="background:var(--line);width:1px;height:14px;display:inline-block"></span><b>斜切橫帶疊置 — 溫和、安靜編輯感</b></div>
+    <div class="vlayout">
+      <div class="why-title reveal">
+        <h2>Why Vietnam,<br>with us</h2>
+        <span class="h2cn">為什麼越南選我們</span>
+        <p class="lead">在越南，我們帶你避開人潮，走進只有當地人知道的角落。</p>
+      </div>
+      <div class="why-tiles reveal">
+        <div class="ptile"><div class="ph"><img src="assets/photos/vietnam-street.jpg" alt=""></div><div class="veil"></div><div class="content"><span class="pnum">01</span><h3>在地嚮導帶路</h3><p>會安巷弄裡只有當地人知道的角落，由住在當地的嚮導帶你走。</p></div></div>
+        <div class="ptile"><div class="ph"><img src="assets/photos/halong-bay.jpg" alt=""></div><div class="veil"></div><div class="content"><span class="pnum">02</span><h3>私人包船・下龍灣</h3><p>不與人共船，包一艘船，慢慢遊下龍灣與秋盆河的水上角落。</p></div></div>
+        <div class="ptile"><div class="ph"><img src="assets/photos/vietnam-morning.jpg" alt=""></div><div class="veil"></div><div class="content"><span class="pnum">03</span><h3>4–8 人的彈性節奏</h3><p>想多睡一小時、臨時改去哪都行——小團才有的自由。</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 方案 B ============ -->
+<section class="variant vb">
+  <div class="wrap">
+    <div class="vtag">Option B<span class="sep" style="background:var(--line);width:1px;height:14px;display:inline-block"></span><b>斜切錯落卡 — 強斜度、對角動感</b></div>
+    <div class="vlayout">
+      <div class="why-title reveal">
+        <h2>Why Vietnam,<br>with us</h2>
+        <span class="h2cn">為什麼越南選我們</span>
+        <p class="lead">在越南，我們帶你避開人潮，走進只有當地人知道的角落。</p>
+      </div>
+      <div class="why-tiles reveal">
+        <div class="ptile"><div class="ph"><img src="assets/photos/vietnam-street.jpg" alt=""></div><div class="veil"></div><div class="content"><span class="pnum">01</span><h3>在地嚮導帶路</h3><p>會安巷弄裡只有當地人知道的角落，由住在當地的嚮導帶你走。</p></div></div>
+        <div class="ptile"><div class="ph"><img src="assets/photos/halong-bay.jpg" alt=""></div><div class="veil"></div><div class="content"><span class="pnum">02</span><h3>私人包船・下龍灣</h3><p>不與人共船，包一艘船，慢慢遊下龍灣的水上角落。</p></div></div>
+        <div class="ptile"><div class="ph"><img src="assets/photos/vietnam-morning.jpg" alt=""></div><div class="veil"></div><div class="content"><span class="pnum">03</span><h3>4–8 人的彈性節奏</h3><p>想多睡一小時、臨時改去哪都行——小團才有的自由。</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 方案 C ============ -->
+<section class="variant vc">
+  <div class="wrap">
+    <div class="vtag">Option C<span class="sep" style="background:var(--line);width:1px;height:14px;display:inline-block"></span><b>skewX 平行四邊形 — 照片不變形、最圖像化</b></div>
+    <div class="vlayout">
+      <div class="why-title reveal">
+        <h2>Why Vietnam,<br>with us</h2>
+        <span class="h2cn">為什麼越南選我們</span>
+        <p class="lead">在越南，我們帶你避開人潮，走進只有當地人知道的角落。</p>
+      </div>
+      <div class="why-tiles reveal">
+        <div class="ptile"><div class="ph"><img src="assets/photos/vietnam-street.jpg" alt=""></div><div class="veil"></div><span class="corner"></span><div class="content"><span class="pnum">01</span><h3>在地嚮導帶路</h3><p>會安巷弄裡只有當地人知道的角落，由當地嚮導帶你走。</p></div></div>
+        <div class="ptile"><div class="ph"><img src="assets/photos/halong-bay.jpg" alt=""></div><div class="veil"></div><span class="corner"></span><div class="content"><span class="pnum">02</span><h3>私人包船・下龍灣</h3><p>不與人共船，包一艘船，慢慢遊下龍灣的水上角落。</p></div></div>
+        <div class="ptile"><div class="ph"><img src="assets/photos/vietnam-morning.jpg" alt=""></div><div class="veil"></div><span class="corner"></span><div class="content"><span class="pnum">03</span><h3>4–8 人的彈性節奏</h3><p>想多睡一小時、臨時改去哪都行——小團才有的自由。</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div style="height:120px"></div>
+<script src="corner.js"></script>
+</body>
+</html>

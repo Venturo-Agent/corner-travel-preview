@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>角落旅行社 CORNER TRAVEL ｜ 私人小包團．台北</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Noto+Serif+TC:wght@400;500;600;700&family=Noto+Sans+TC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#F4EDE2;
+    --terra:#B5543A;
+    --terra-dark:#9A4128;
+    --ink:#2A2520;
+    --sage:#7C8471;
+    --line:rgba(42,37,32,.14);
+    --serif:"Noto Serif TC",serif;
+    --sans:"Noto Sans TC",sans-serif;
+    --display:"Fraunces",serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--cream);
+    color:var(--ink);
+    font-family:var(--sans);
+    font-weight:300;
+    line-height:1.75;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  img{display:block;max-width:100%}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1280px;margin:0 auto;padding:0 48px}
+  .kicker{
+    font-family:var(--display);
+    font-size:13px;font-weight:500;
+    letter-spacing:.34em;text-transform:uppercase;
+    color:var(--terra);
+  }
+  .eyebrow-line{display:flex;align-items:center;gap:18px;margin-bottom:26px}
+  .eyebrow-line::after{content:"";flex:1;height:1px;background:var(--line)}
+  .sec-num{font-family:var(--display);font-style:italic;color:var(--sage);font-size:15px;letter-spacing:.04em}
+  h1,h2,h3{font-family:var(--serif);font-weight:600;line-height:1.18;letter-spacing:.01em}
+  .btn{
+    display:inline-block;font-family:var(--sans);font-weight:400;
+    font-size:15px;letter-spacing:.12em;cursor:pointer;
+    transition:.4s ease;
+  }
+  .btn-solid{
+    background:var(--terra);color:var(--cream);
+    padding:17px 38px;border:1px solid var(--terra);
+  }
+  .btn-solid:hover{background:var(--terra-dark);border-color:var(--terra-dark)}
+  .btn-ghost{
+    color:var(--ink);padding:17px 30px;
+    border-bottom:1px solid var(--ink);padding-left:0;padding-right:0;
+  }
+  .btn-ghost:hover{color:var(--terra);border-color:var(--terra)}
+
+  /* ---------- NAV ---------- */
+  nav{
+    position:fixed;top:0;left:0;right:0;z-index:50;
+    transition:background .5s ease, box-shadow .5s ease, padding .4s ease;
+    padding:26px 0;
+  }
+  nav.scrolled{
+    background:rgba(244,237,226,.94);
+    backdrop-filter:saturate(140%) blur(8px);
+    box-shadow:0 1px 0 var(--line);
+    padding:16px 0;
+  }
+  .nav-inner{display:flex;align-items:center;justify-content:space-between}
+  .logo{font-family:var(--serif);font-weight:600;font-size:22px;letter-spacing:.04em}
+  .logo .dot{color:var(--terra);margin:0 4px}
+  .logo .en{font-family:var(--display);font-size:14px;letter-spacing:.22em;font-weight:500}
+  .nav-links{display:flex;align-items:center;gap:34px}
+  .nav-links a{font-size:15px;letter-spacing:.02em;position:relative;padding:4px 0}
+  .nav-links a::after{content:"";position:absolute;left:0;bottom:0;width:0;height:1px;background:var(--terra);transition:width .35s ease}
+  .nav-links a:hover::after{width:100%}
+  .nav-cta{background:var(--terra);color:var(--cream);padding:11px 24px;font-size:14px;letter-spacing:.08em;transition:.4s}
+  .nav-cta:hover{background:var(--terra-dark)}
+  .nav-cta::after{display:none}
+
+  /* ---------- HERO ---------- */
+  .hero{min-height:100vh;max-height:920px;display:flex;align-items:center;padding-top:90px}
+  .hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:center;width:100%}
+  .hero-tag{
+    display:inline-block;background:var(--terra);color:var(--cream);
+    font-family:var(--display);font-weight:500;font-size:12px;
+    letter-spacing:.26em;text-transform:uppercase;
+    padding:7px 15px;margin-bottom:30px;
+  }
+  .hero-kicker{display:block;margin-bottom:30px;font-size:12.5px}
+  .hero h1{
+    font-size:64px;line-height:1.16;margin-bottom:30px;
+  }
+  .hero h1 em{font-family:var(--display);font-style:italic;color:var(--terra);font-weight:400}
+  .hero-lead{font-size:17px;max-width:430px;color:#4a423a;margin-bottom:40px}
+  .hero-cta{display:flex;align-items:center;gap:30px;flex-wrap:wrap}
+  .hero-fig{position:relative}
+  .hero-fig img{width:100%;height:660px;object-fit:cover;object-position:center 30%}
+  .hero-fig .frame{position:absolute;inset:0;border:1px solid var(--terra);transform:translate(18px,18px);z-index:-1}
+  .hero-cap{
+    position:absolute;left:0;bottom:-14px;transform:translateY(100%);
+    font-family:var(--display);font-style:italic;font-size:14px;color:var(--sage);
+  }
+  .hero-cap b{font-style:normal;color:var(--terra);font-weight:500}
+
+  section{padding:120px 0}
+  .sec-head{margin-bottom:64px;max-width:680px}
+  .sec-head h2{font-size:44px;margin-bottom:14px}
+  .sec-head .en-sub{font-family:var(--display);font-style:italic;color:var(--sage);font-size:20px}
+
+  /* ---------- DESTINATIONS ---------- */
+  .dest-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px 34px}
+  .dest{position:relative;cursor:pointer}
+  .dest .ph{overflow:hidden;background:#ded3c2}
+  .dest .ph img{width:100%;height:340px;object-fit:cover;transition:transform 1.1s cubic-bezier(.2,.7,.2,1);filter:saturate(.96)}
+  .dest.tall .ph img{height:480px}
+  .dest:hover .ph img{transform:scale(1.05)}
+  .dest-meta{display:flex;align-items:baseline;gap:14px;padding:18px 2px 0}
+  .dest-idx{font-family:var(--display);font-style:italic;color:var(--terra);font-size:18px;line-height:1}
+  .dest-name{font-family:var(--serif);font-size:23px;font-weight:600}
+  .dest-name .en{font-family:var(--display);font-weight:400;font-size:15px;color:var(--sage);font-style:italic;margin-left:8px}
+  .dest-desc{padding:6px 2px 0;font-size:14.5px;color:#5a5147}
+  .dest.offset{margin-top:54px}
+
+  /* ---------- WHY (terra band) ---------- */
+  .why{background:var(--terra);color:var(--cream);position:relative}
+  .why .kicker{color:rgba(244,237,226,.7)}
+  .why .eyebrow-line::after{background:rgba(244,237,226,.28)}
+  .why .sec-head h2{color:var(--cream)}
+  .why .sec-head .en-sub{color:rgba(244,237,226,.62)}
+  .why-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:0}
+  .why-item{padding:42px 48px 42px 0;border-top:1px solid rgba(244,237,226,.22)}
+  .why-item:nth-child(odd){padding-right:60px}
+  .why-item:nth-child(even){padding-left:60px;border-left:1px solid rgba(244,237,226,.22)}
+  .why-num{font-family:var(--display);font-style:italic;font-size:34px;color:rgba(244,237,226,.55);margin-bottom:14px;font-weight:400}
+  .why-item h3{color:var(--cream);font-size:24px;margin-bottom:12px}
+  .why-item p{color:rgba(244,237,226,.86);font-size:15.5px;max-width:380px}
+
+  /* ---------- PROCESS ---------- */
+  .proc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:48px}
+  .proc{position:relative}
+  .proc-step{font-family:var(--display);font-style:italic;color:var(--terra);font-size:16px;letter-spacing:.06em;margin-bottom:20px;display:flex;align-items:center;gap:14px}
+  .proc-step::after{content:"";flex:1;height:1px;background:var(--line)}
+  .proc p{font-size:16px;color:#4a423a}
+  .proc p::first-letter{
+    font-family:var(--serif);font-weight:600;font-size:58px;float:left;
+    line-height:.82;margin:6px 14px 0 0;color:var(--terra);
+  }
+  .proc .en{font-family:var(--display);font-style:italic;color:var(--sage);display:block;margin-top:18px;font-size:15px}
+
+  /* ---------- FEATURED ---------- */
+  .feat{background:#efe6d7}
+  .entry{
+    display:grid;grid-template-columns:1.1fr 1fr;gap:50px;align-items:center;
+    padding:46px 0;border-bottom:1px solid var(--line);
+  }
+  .entry:first-of-type{border-top:1px solid var(--line)}
+  .entry:nth-child(even) .entry-fig{order:2}
+  .entry-fig{overflow:hidden;background:#ded3c2}
+  .entry-fig img{width:100%;height:330px;object-fit:cover;transition:transform 1s ease}
+  .entry:hover .entry-fig img{transform:scale(1.04)}
+  .entry-idx{font-family:var(--display);font-style:italic;color:var(--terra);font-size:17px;margin-bottom:14px}
+  .entry h3{font-size:32px;margin-bottom:14px}
+  .entry .specs{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:18px}
+  .entry .tag{font-size:12.5px;letter-spacing:.08em;color:var(--sage);border:1px solid var(--line);padding:5px 13px}
+  .entry .price{font-family:var(--serif);font-size:20px;font-weight:500;color:var(--ink)}
+  .entry .price em{font-style:normal;font-family:var(--sans);font-size:12px;color:var(--terra);font-weight:400;margin-left:8px;letter-spacing:.1em}
+  .entry .more{display:inline-block;margin-top:20px;font-family:var(--display);font-style:italic;color:var(--terra);font-size:16px;border-bottom:1px solid var(--terra);padding-bottom:2px}
+
+  /* ---------- TESTIMONIAL ---------- */
+  .quote{text-align:center;padding:130px 0}
+  .quote-mark{font-family:var(--display);font-size:120px;line-height:.4;color:var(--terra);opacity:.55}
+  .quote blockquote{
+    font-family:var(--serif);font-style:italic;font-weight:500;
+    font-size:34px;line-height:1.55;max-width:920px;margin:30px auto 36px;
+  }
+  .quote cite{font-family:var(--display);font-style:italic;color:var(--sage);font-size:16px}
+
+  /* ---------- CONTACT / CTA ---------- */
+  .closing{background:var(--ink);color:var(--cream);text-align:center;padding:120px 0}
+  .closing .kicker{color:rgba(244,237,226,.6)}
+  .closing .eyebrow-line{justify-content:center}
+  .closing .eyebrow-line::after{display:none}
+  .closing h2{color:var(--cream);font-size:48px;margin:18px 0 30px}
+  .closing h2 em{font-family:var(--display);font-style:italic;color:var(--terra);font-weight:400}
+  .closing .btn-solid{margin-top:6px}
+
+  /* ---------- FOOTER ---------- */
+  footer{background:var(--ink);color:rgba(244,237,226,.78);padding:70px 0 50px;border-top:1px solid rgba(244,237,226,.14)}
+  .foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:50px;margin-bottom:46px}
+  .foot-logo{font-family:var(--serif);font-size:24px;color:var(--cream);margin-bottom:16px}
+  .foot-logo .dot{color:var(--terra)}
+  .foot p{font-size:14px;line-height:1.9}
+  .foot h4{font-family:var(--display);font-style:italic;font-weight:500;color:rgba(244,237,226,.55);font-size:14px;letter-spacing:.1em;margin-bottom:16px}
+  .foot ul{list-style:none}
+  .foot ul li{margin-bottom:9px;font-size:14.5px}
+  .foot ul li a:hover{color:var(--terra)}
+  .foot-bot{border-top:1px solid rgba(244,237,226,.14);padding-top:26px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:12.5px;color:rgba(244,237,226,.5)}
+
+  /* ---------- REVEAL ---------- */
+  .reveal{opacity:0;transform:translateY(26px);transition:opacity 1s cubic-bezier(.2,.7,.2,1),transform 1s cubic-bezier(.2,.7,.2,1)}
+  .reveal.in{opacity:1;transform:none}
+
+  @media(max-width:980px){
+    .wrap{padding:0 26px}
+    .hero-grid,.why-grid,.dest-grid,.proc-grid,.entry,.foot-grid{grid-template-columns:1fr}
+    .hero{min-height:auto;padding:130px 0 80px}
+    .hero h1{font-size:46px}
+    .hero-fig img{height:440px}
+    .hero-cap{position:static;transform:none;margin-top:24px;display:block}
+    .dest.offset{margin-top:0}
+    .why-item,.why-item:nth-child(even){padding:34px 0;border-left:none}
+    .entry:nth-child(even) .entry-fig{order:0}
+    .sec-head h2,.closing h2,.why .sec-head h2{font-size:34px}
+    .quote blockquote{font-size:26px}
+    .nav-links{display:none}
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="wrap nav-inner">
+    <div class="logo">角落<span class="dot">·</span><span class="en">CORNER</span></div>
+    <div class="nav-links">
+      <a href="#destinations">目的地 Destinations</a>
+      <a href="#private">私人包團 Private Tours</a>
+      <a href="#journal">旅誌 Journal</a>
+      <a href="#about">關於 About</a>
+      <a href="#contact">聯絡 Contact</a>
+      <a href="#contact" class="nav-cta">預約諮詢</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div class="hero-copy reveal">
+        <span class="hero-tag">ISSUE 01 — ASIA</span>
+        <span class="kicker hero-kicker">PRIVATE SMALL-GROUP JOURNEYS ｜ 私人小包團．台北</span>
+        <h1>每一個<em>角落</em>，<br>都值得為你停留</h1>
+        <p class="hero-lead">角落旅行社專注私人客製小包團，帶你走進日本、韓國、泰國、越南、峇里島與中國，那些拼團去不了的角落。</p>
+        <div class="hero-cta">
+          <a href="#contact" class="btn btn-solid">開始規劃我的旅程</a>
+          <a href="#destinations" class="btn btn-ghost">看看我們去哪些角落</a>
+        </div>
+      </div>
+      <div class="hero-fig reveal">
+        <span class="frame"></span>
+        <img src="assets/photos/korea-hanok.jpg" alt="首爾北村韓屋街，粉色夕陽下的行人與天際線" loading="eager">
+        <span class="hero-cap"><b>首爾 · 北村</b>　拼團錯過的轉角時光</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- DESTINATIONS -->
+<section id="destinations">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="eyebrow-line"><span class="kicker">CONTENTS</span><span class="sec-num">目錄 / 06 corners</span></div>
+      <h2>我們收藏的角落</h2>
+      <p class="en-sub">The corners we keep</p>
+    </div>
+    <div class="dest-grid">
+      <div class="dest tall reveal">
+        <div class="ph"><img src="assets/photos/kyoto-alley.jpg" alt="京都安靜巷弄與秋樹" loading="lazy"></div>
+        <div class="dest-meta"><span class="dest-idx">01</span><span class="dest-name">日本<span class="en">Japan</span></span></div>
+        <p class="dest-desc">巷弄轉角的四季與職人</p>
+      </div>
+      <div class="dest reveal">
+        <div class="ph"><img src="assets/photos/korea-palace.jpg" alt="韓國古宮" loading="lazy"></div>
+        <div class="dest-meta"><span class="dest-idx">02</span><span class="dest-name">韓國<span class="en">Korea</span></span></div>
+        <p class="dest-desc">古宮與市井之間的慢時光</p>
+      </div>
+      <div class="dest offset reveal">
+        <div class="ph"><img src="assets/photos/thailand-temple.jpg" alt="泰國金色寺廟" loading="lazy"></div>
+        <div class="dest-meta"><span class="dest-idx">03</span><span class="dest-name">泰國<span class="en">Thailand</span></span></div>
+        <p class="dest-desc">金色寺廟與海風</p>
+      </div>
+      <div class="dest reveal">
+        <div class="ph"><img src="assets/photos/hoian-lantern.jpg" alt="會安燈籠老街" loading="lazy"></div>
+        <div class="dest-meta"><span class="dest-idx">04</span><span class="dest-name">越南<span class="en">Vietnam</span></span></div>
+        <p class="dest-desc">會安燈火與老街氣味</p>
+      </div>
+      <div class="dest tall reveal">
+        <div class="ph"><img src="assets/photos/bali-terrace.jpg" alt="峇里島烏布梯田" loading="lazy"></div>
+        <div class="dest-meta"><span class="dest-idx">05</span><span class="dest-name">峇里島<span class="en">Bali</span></span></div>
+        <p class="dest-desc">梯田、神廟與療癒</p>
+      </div>
+      <div class="dest reveal">
+        <div class="ph"><img src="assets/photos/china-scenic.jpg" alt="中國古鎮山水" loading="lazy"></div>
+        <div class="dest-meta"><span class="dest-idx">06</span><span class="dest-name">中國<span class="en">China</span></span></div>
+        <p class="dest-desc">古鎮巷弄與山水</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY (terra band) -->
+<section id="private" class="why">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="eyebrow-line"><span class="kicker">WHY CORNER</span></div>
+      <h2>為什麼選擇角落的小包團</h2>
+      <p class="en-sub">Small groups, kept close</p>
+    </div>
+    <div class="why-grid">
+      <div class="why-item reveal">
+        <div class="why-num">01</div>
+        <h3>不拼團、只走自己人</h3>
+        <p>4–8 人成行，全程都是你認識的人。</p>
+      </div>
+      <div class="why-item reveal">
+        <div class="why-num">02</div>
+        <h3>行程為你量身</h3>
+        <p>不買現成套裝，一條一條陪你排。</p>
+      </div>
+      <div class="why-item reveal">
+        <div class="why-num">03</div>
+        <h3>在地的角落體驗</h3>
+        <p>帶你去當地人才知道的小地方。</p>
+      </div>
+      <div class="why-item reveal">
+        <div class="why-num">04</div>
+        <h3>一對一旅程管家</h3>
+        <p>從規劃到回家，同一個人全程顧你。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section id="about">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="eyebrow-line"><span class="kicker">HOW IT WORKS</span><span class="sec-num">三步 / three steps</span></div>
+      <h2>三步，從想去到出發</h2>
+    </div>
+    <div class="proc-grid">
+      <div class="proc reveal">
+        <div class="proc-step">① 第一步</div>
+        <p>聊聊你想要的旅行，告訴我們幾個人、想去的角落、想要的步調。</p>
+        <span class="en">We listen</span>
+      </div>
+      <div class="proc reveal">
+        <div class="proc-step">② 第二步</div>
+        <p>為你量身規劃，一條一條把行程排到你滿意，沒有現成套裝。</p>
+        <span class="en">We tailor</span>
+      </div>
+      <div class="proc reveal">
+        <div class="proc-step">③ 第三步</div>
+        <p>出發，全程陪伴，同一位旅程管家從台北一路顧到你回家。</p>
+        <span class="en">We travel with you</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURED / JOURNAL -->
+<section id="journal" class="feat">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="eyebrow-line"><span class="kicker">DEPARTURES</span><span class="sec-num">旅誌條目 / now boarding</span></div>
+      <h2>正在出發的角落</h2>
+      <p class="en-sub">Corners now departing</p>
+    </div>
+
+    <article class="entry reveal">
+      <div class="entry-fig"><img src="assets/photos/kyoto-temple.jpg" alt="京都古都寺院" loading="lazy"></div>
+      <div class="entry-body">
+        <div class="entry-idx">01 — 日本 JAPAN</div>
+        <h3>京都・奈良 古都慢旅</h3>
+        <div class="specs"><span class="tag">6 天 5 夜</span><span class="tag">私人小包團</span><span class="tag">4–8 人成行</span></div>
+        <p class="price">每人 NT$58,000 起<em>示意</em></p>
+        <a href="#contact" class="more">為這趟旅程諮詢</a>
+      </div>
+    </article>
+
+    <article class="entry reveal">
+      <div class="entry-fig"><img src="assets/photos/bali-temple.jpg" alt="峇里島神廟" loading="lazy"></div>
+      <div class="entry-body">
+        <div class="entry-idx">02 — 峇里島 BALI</div>
+        <h3>峇里島 療癒森活</h3>
+        <div class="specs"><span class="tag">5 天 4 夜</span><span class="tag">私人小包團</span><span class="tag">4–8 人成行</span></div>
+        <p class="price">每人 NT$42,000 起<em>示意</em></p>
+        <a href="#contact" class="more">為這趟旅程諮詢</a>
+      </div>
+    </article>
+
+    <article class="entry reveal">
+      <div class="entry-fig"><img src="assets/photos/hoian-night.jpg" alt="會安暮色燈籠" loading="lazy"></div>
+      <div class="entry-body">
+        <div class="entry-idx">03 — 越南 VIETNAM</div>
+        <h3>會安・峴港 燈火之旅</h3>
+        <div class="specs"><span class="tag">5 天 4 夜</span><span class="tag">私人小包團</span><span class="tag">4–8 人成行</span></div>
+        <p class="price">每人 NT$36,000 起<em>示意</em></p>
+        <a href="#contact" class="more">為這趟旅程諮詢</a>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- TESTIMONIAL -->
+<section class="quote">
+  <div class="wrap reveal">
+    <div class="quote-mark">「</div>
+    <blockquote>第一次有旅行社願意為我們四個人，重排整整一個下午的行程。這不是旅行團，是有人幫你把旅行過好。</blockquote>
+    <cite>— 王小姐，京都私人包團 2025</cite>
+  </div>
+</section>
+
+<!-- CLOSING CTA -->
+<section id="contact" class="closing">
+  <div class="wrap reveal">
+    <div class="eyebrow-line"><span class="kicker">LET'S TALK</span></div>
+    <h2>告訴我們，<em>你的角落</em>在哪裡</h2>
+    <a href="mailto:cornertravelagency@gmail.com" class="btn btn-solid">預約諮詢</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="foot-logo">角落旅行社 <span class="dot">·</span> CORNER TRAVEL</div>
+        <p>世界上那些拼團到不了、別人錯過的角落，<br>我們為你而留。專注私人客製小包團。</p>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li>台北市重慶北路一段67號8樓之2</li>
+          <li><a href="tel:+886277516051">+886 2 7751 6051</a></li>
+          <li><a href="mailto:cornertravelagency@gmail.com">cornertravelagency@gmail.com</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Follow</h4>
+        <ul>
+          <li><a href="#">IG @cornertravel.w</a></li>
+          <li><a href="#">FB 角落旅行社</a></li>
+          <li><a href="#">LINE 線上諮詢</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bot">
+      <span>© 2026 角落旅行社 CORNER TRAVEL</span>
+      <span>交通部觀光署合法登記旅行社（註冊字號待補）</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Nav background on scroll
+  const nav=document.getElementById('nav');
+  const onScroll=()=>nav.classList.toggle('scrolled',window.scrollY>40);
+  onScroll();window.addEventListener('scroll',onScroll,{passive:true});
+
+  // Scroll reveal — enhancement only; guaranteed fully visible.
+  const items=document.querySelectorAll('.reveal');
+  if('IntersectionObserver'in window){
+    const io=new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
+    },{threshold:.12,rootMargin:'0px 0px -8% 0px'});
+    items.forEach(el=>{
+      // already in viewport on load -> show immediately
+      const r=el.getBoundingClientRect();
+      if(r.top<window.innerHeight&&r.bottom>0){el.classList.add('in');}
+      else{io.observe(el);}
+    });
+    // failsafe: nothing stays hidden past 1.2s
+    setTimeout(()=>items.forEach(el=>el.classList.add('in')),1200);
+  }else{
+    items.forEach(el=>el.classList.add('in'));
+  }
+</script>
+</body>
+</html>

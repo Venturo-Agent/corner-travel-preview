@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>角落旅行社 CORNER TRAVEL｜私人小包團</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Noto+Sans+TC:wght@300;400;500&family=Noto+Serif+TC:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1A1714;
+    --ink-soft:#221E1A;
+    --paper:#F4EFE8;
+    --paper-dim:#D8CFC2;
+    --gold:#C9A678;
+    --gold-bright:#E0C49B;
+    --line:rgba(201,166,120,.28);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--ink);
+    color:var(--paper);
+    font-family:"Noto Sans TC",sans-serif;
+    font-weight:300;
+    line-height:1.85;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  img{display:block;width:100%;height:100%;object-fit:cover}
+  .serif{font-family:"Noto Serif TC",serif}
+  .display{font-family:"Cormorant Garamond",serif;font-weight:300}
+  .kicker{
+    font-family:"Cormorant Garamond",serif;
+    text-transform:uppercase;
+    letter-spacing:.42em;
+    font-size:13px;
+    color:var(--gold);
+    font-weight:400;
+  }
+  .wrap{max-width:1280px;margin:0 auto;padding:0 48px}
+  a{color:inherit;text-decoration:none}
+
+  /* ---------- NAV ---------- */
+  nav{
+    position:fixed;top:0;left:0;right:0;z-index:100;
+    padding:26px 48px;
+    display:flex;align-items:center;justify-content:space-between;
+    transition:background .6s ease,padding .6s ease,box-shadow .6s ease,border-color .6s ease;
+    border-bottom:1px solid transparent;
+  }
+  nav.scrolled{
+    background:rgba(20,18,16,.86);
+    backdrop-filter:blur(14px);
+    padding:18px 48px;
+    box-shadow:0 1px 40px rgba(0,0,0,.4);
+    border-bottom:1px solid var(--line);
+  }
+  .logo{font-family:"Noto Serif TC",serif;font-size:21px;letter-spacing:.18em;color:var(--paper);font-weight:400}
+  .logo span{color:var(--gold)}
+  .nav-links{display:flex;gap:38px;align-items:center}
+  .nav-links a{font-size:14px;letter-spacing:.16em;color:var(--paper-dim);transition:color .35s}
+  .nav-links a:hover{color:var(--gold-bright)}
+  .nav-cta{
+    border:1px solid var(--gold);
+    color:var(--gold-bright)!important;
+    padding:10px 24px;
+    letter-spacing:.16em;
+    font-size:13px;
+    transition:background .4s,color .4s;
+  }
+  .nav-cta:hover{background:var(--gold);color:var(--ink)!important}
+
+  /* ---------- HERO ---------- */
+  .hero{position:relative;height:100vh;max-height:900px;min-height:680px;overflow:hidden;display:flex;align-items:flex-end}
+  .hero-img{position:absolute;inset:0;z-index:0;overflow:hidden}
+  .hero-img img{
+    transform:scale(1);
+    animation:ken 26s ease-in-out infinite alternate;
+  }
+  @keyframes ken{from{transform:scale(1)}to{transform:scale(1.09)}}
+  .hero-scrim{
+    position:absolute;inset:0;z-index:1;
+    background:
+      linear-gradient(to top,rgba(20,18,16,.92) 0%,rgba(20,18,16,.35) 38%,rgba(20,18,16,.15) 60%,rgba(20,18,16,.45) 100%);
+  }
+  .hero-inner{position:relative;z-index:2;width:100%;padding-bottom:96px}
+  .hero-kicker{margin-bottom:30px}
+  .hero h1{
+    font-family:"Noto Serif TC",serif;
+    font-weight:400;
+    font-size:74px;
+    line-height:1.22;
+    color:var(--paper);
+    letter-spacing:.04em;
+    max-width:18em;
+    text-shadow:0 2px 30px rgba(0,0,0,.5);
+  }
+  .hero-sub{
+    margin-top:30px;
+    max-width:34em;
+    font-size:18px;
+    line-height:2;
+    color:var(--paper-dim);
+    font-weight:300;
+  }
+  .hero-cta{display:flex;gap:22px;margin-top:46px;align-items:center;flex-wrap:wrap}
+  .btn-primary{
+    background:var(--gold);
+    color:var(--ink);
+    padding:17px 38px;
+    font-size:15px;
+    letter-spacing:.1em;
+    font-family:"Noto Serif TC",serif;
+    transition:transform .4s,background .4s;
+  }
+  .btn-primary:hover{background:var(--gold-bright);transform:translateY(-2px)}
+  .btn-ghost{
+    color:var(--paper);
+    font-size:15px;
+    letter-spacing:.1em;
+    border-bottom:1px solid var(--gold);
+    padding-bottom:5px;
+    transition:color .35s,border-color .35s;
+  }
+  .btn-ghost:hover{color:var(--gold-bright)}
+  .scroll-hint{
+    position:absolute;bottom:34px;left:50%;transform:translateX(-50%);z-index:3;
+    display:flex;flex-direction:column;align-items:center;gap:12px;
+    color:var(--paper-dim);
+  }
+  .scroll-hint .k{font-family:"Cormorant Garamond",serif;letter-spacing:.32em;text-transform:uppercase;font-size:11px}
+  .scroll-hint .line{width:1px;height:46px;background:linear-gradient(var(--gold),transparent);animation:pulse 2.4s ease-in-out infinite}
+  @keyframes pulse{0%,100%{opacity:.4;transform:scaleY(.7)}50%{opacity:1;transform:scaleY(1)}}
+
+  /* ---------- SECTION HEADERS ---------- */
+  .sec{padding:130px 0}
+  .sec-head{margin-bottom:64px}
+  .sec-head .kicker{display:block;margin-bottom:18px}
+  .sec-head h2{
+    font-family:"Noto Serif TC",serif;
+    font-weight:400;
+    font-size:46px;
+    line-height:1.3;
+    letter-spacing:.04em;
+    color:var(--paper);
+  }
+  .sec-head h2 em{font-family:"Cormorant Garamond",serif;font-style:italic;color:var(--gold);font-size:.78em;font-weight:300}
+
+  /* ---------- DESTINATIONS ---------- */
+  .dest-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  .dest-card{position:relative;overflow:hidden;height:440px;cursor:pointer}
+  .dest-card.tall{height:540px}
+  .dest-card img{transition:transform 1.4s cubic-bezier(.2,.7,.2,1)}
+  .dest-card:hover img{transform:scale(1.07)}
+  .dest-card .veil{
+    position:absolute;inset:0;
+    background:linear-gradient(to top,rgba(20,18,16,.92) 0%,rgba(20,18,16,.25) 45%,rgba(20,18,16,.08) 100%);
+  }
+  .dest-card .cap{position:absolute;left:30px;right:30px;bottom:30px;z-index:2}
+  .dest-card .en{font-family:"Cormorant Garamond",serif;text-transform:uppercase;letter-spacing:.28em;font-size:12px;color:var(--gold-bright);margin-bottom:8px}
+  .dest-card h3{font-family:"Noto Serif TC",serif;font-weight:500;font-size:27px;letter-spacing:.05em;color:var(--paper);margin-bottom:6px}
+  .dest-card p{font-size:14px;color:var(--paper-dim);font-weight:300}
+  .dest-grid.row2{margin-top:14px}
+
+  /* ---------- WHY (dark, big gold numbers) ---------- */
+  .why{background:var(--ink-soft);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .why-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:0}
+  .why-item{padding:54px 56px;border-bottom:1px solid var(--line)}
+  .why-item:nth-child(odd){border-right:1px solid var(--line)}
+  .why-item:nth-child(3),.why-item:nth-child(4){border-bottom:none}
+  .why-num{font-family:"Cormorant Garamond",serif;font-weight:300;font-size:80px;line-height:1;color:var(--gold);opacity:.85;margin-bottom:22px}
+  .why-item h3{font-family:"Noto Serif TC",serif;font-weight:500;font-size:24px;color:var(--paper);margin-bottom:14px;letter-spacing:.04em}
+  .why-item p{font-size:16px;color:var(--paper-dim);max-width:26em;font-weight:300}
+
+  /* ---------- PROCESS ---------- */
+  .proc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:48px}
+  .proc-item{text-align:left;padding-top:30px;border-top:1px solid var(--line)}
+  .proc-num{font-family:"Cormorant Garamond",serif;font-size:64px;font-weight:300;color:var(--gold);line-height:1;margin-bottom:24px}
+  .proc-item h3{font-family:"Noto Serif TC",serif;font-weight:500;font-size:25px;color:var(--paper);margin-bottom:6px;letter-spacing:.05em}
+  .proc-item .en{font-family:"Cormorant Garamond",serif;font-style:italic;font-size:18px;color:var(--gold-bright);letter-spacing:.04em}
+
+  /* ---------- TRIPS ---------- */
+  .trips-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  .trip-card{position:relative;overflow:hidden;height:500px;cursor:pointer}
+  .trip-card img{transition:transform 1.4s cubic-bezier(.2,.7,.2,1)}
+  .trip-card:hover img{transform:scale(1.06)}
+  .trip-card .veil{position:absolute;inset:0;background:linear-gradient(to top,rgba(20,18,16,.94) 0%,rgba(20,18,16,.3) 50%,rgba(20,18,16,.1) 100%)}
+  .trip-card .cap{position:absolute;left:30px;right:30px;bottom:30px;z-index:2}
+  .trip-card .meta{font-family:"Cormorant Garamond",serif;letter-spacing:.2em;text-transform:uppercase;font-size:12px;color:var(--gold-bright);margin-bottom:12px}
+  .trip-card h3{font-family:"Noto Serif TC",serif;font-weight:500;font-size:26px;color:var(--paper);margin-bottom:14px;letter-spacing:.04em;line-height:1.4}
+  .trip-card .price{font-size:15px;color:var(--paper);font-weight:300}
+  .trip-card .price b{font-family:"Noto Serif TC",serif;font-weight:500;color:var(--gold-bright)}
+  .trip-card .price .hint{font-size:12px;color:var(--paper-dim);letter-spacing:.1em}
+
+  /* ---------- TESTIMONIAL ---------- */
+  .testi{position:relative;height:620px;display:flex;align-items:center;overflow:hidden}
+  .testi-img{position:absolute;inset:0;z-index:0}
+  .testi-scrim{position:absolute;inset:0;z-index:1;background:linear-gradient(to right,rgba(20,18,16,.92) 0%,rgba(20,18,16,.7) 55%,rgba(20,18,16,.55) 100%)}
+  .testi-inner{position:relative;z-index:2;max-width:50em}
+  .testi blockquote{
+    font-family:"Noto Serif TC",serif;
+    font-weight:300;
+    font-style:italic;
+    font-size:33px;
+    line-height:1.7;
+    color:var(--paper);
+    letter-spacing:.02em;
+  }
+  .testi .mark{font-family:"Cormorant Garamond",serif;font-size:110px;color:var(--gold);line-height:0;opacity:.5;display:block;height:50px}
+  .testi cite{display:block;margin-top:34px;font-style:normal;font-size:15px;letter-spacing:.14em;color:var(--gold-bright)}
+
+  /* ---------- CONTACT / FOOTER ---------- */
+  .contact{padding:120px 0 70px;background:var(--ink-soft);border-top:1px solid var(--line)}
+  .contact-top{display:flex;justify-content:space-between;align-items:flex-end;gap:40px;flex-wrap:wrap;margin-bottom:80px}
+  .contact-top h2{font-family:"Noto Serif TC",serif;font-weight:400;font-size:48px;line-height:1.3;color:var(--paper);letter-spacing:.04em}
+  .contact-top h2 em{font-family:"Cormorant Garamond",serif;font-style:italic;color:var(--gold);font-weight:300}
+  .footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:48px;padding-top:54px;border-top:1px solid var(--line)}
+  .footer-grid .logo{font-size:24px;margin-bottom:18px}
+  .footer-grid p{font-size:14px;color:var(--paper-dim);line-height:2}
+  .footer-grid h4{font-family:"Cormorant Garamond",serif;text-transform:uppercase;letter-spacing:.26em;font-size:12px;color:var(--gold);margin-bottom:18px}
+  .footer-grid a{font-size:14px;color:var(--paper-dim);display:block;line-height:2.1;transition:color .3s}
+  .footer-grid a:hover{color:var(--gold-bright)}
+  .footer-legal{margin-top:64px;padding-top:28px;border-top:1px solid var(--line);display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px}
+  .footer-legal p{font-size:12px;color:#7d7468;letter-spacing:.06em}
+
+  /* ---------- REVEAL ---------- */
+  .reveal{opacity:0;transform:translateY(26px);transition:opacity 1.1s cubic-bezier(.2,.7,.2,1),transform 1.1s cubic-bezier(.2,.7,.2,1)}
+  .reveal.in{opacity:1;transform:none}
+
+  @media(max-width:1100px){
+    .wrap{padding:0 28px}
+    nav{padding:20px 28px}
+    .hero h1{font-size:54px}
+    .dest-grid,.trips-grid,.proc-grid{grid-template-columns:1fr 1fr}
+    .nav-links{display:none}
+  }
+  @media(max-width:680px){
+    .hero h1{font-size:40px}
+    .sec-head h2,.contact-top h2{font-size:34px}
+    .dest-grid,.trips-grid,.proc-grid,.why-grid{grid-template-columns:1fr}
+    .why-item:nth-child(odd){border-right:none}
+    .testi blockquote{font-size:24px}
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="logo">角落 <span>·</span> CORNER</div>
+  <div class="nav-links">
+    <a href="#destinations">目的地 Destinations</a>
+    <a href="#private">私人包團 Private Tours</a>
+    <a href="#journal">旅誌 Journal</a>
+    <a href="#about">關於 About</a>
+    <a href="#contact">聯絡 Contact</a>
+    <a href="#contact" class="nav-cta">預約諮詢</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-img">
+    <img src="assets/photos/hoian-night.jpg" alt="會安暮色燈火" loading="eager">
+  </div>
+  <div class="hero-scrim"></div>
+  <div class="hero-inner wrap">
+    <div class="hero-kicker kicker">PRIVATE SMALL-GROUP JOURNEYS ｜ 私人小包團．台北</div>
+    <h1 class="serif">每一個角落，<br>都值得為你停留</h1>
+    <p class="hero-sub">角落旅行社專注私人客製小包團，帶你走進日本、韓國、泰國、越南、峇里島與中國，那些拼團去不了的角落。</p>
+    <div class="hero-cta">
+      <a href="#contact" class="btn-primary">開始規劃我的旅程</a>
+      <a href="#destinations" class="btn-ghost">看看我們去哪些角落</a>
+    </div>
+  </div>
+  <div class="scroll-hint">
+    <span class="line"></span>
+    <span class="k">Scroll</span>
+  </div>
+</header>
+
+<!-- DESTINATIONS -->
+<section class="sec" id="destinations">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="kicker">The corners we keep</span>
+      <h2 class="serif">我們收藏的角落 <em>— Six places, kept for you</em></h2>
+    </div>
+    <div class="dest-grid">
+      <a class="dest-card tall reveal">
+        <img src="assets/photos/kyoto-alley.jpg" alt="京都巷弄" loading="lazy">
+        <div class="veil"></div>
+        <div class="cap"><div class="en">Japan</div><h3>日本</h3><p>巷弄轉角的四季與職人</p></div>
+      </a>
+      <a class="dest-card tall reveal">
+        <img src="assets/photos/korea-hanok.jpg" alt="北村韓屋" loading="lazy">
+        <div class="veil"></div>
+        <div class="cap"><div class="en">Korea</div><h3>韓國</h3><p>古宮與市井之間的慢時光</p></div>
+      </a>
+      <a class="dest-card tall reveal">
+        <img src="assets/photos/china-scenic.jpg" alt="中國山水" loading="lazy">
+        <div class="veil"></div>
+        <div class="cap"><div class="en">China</div><h3>中國</h3><p>古鎮巷弄與山水</p></div>
+      </a>
+    </div>
+    <div class="dest-grid row2">
+      <a class="dest-card reveal">
+        <img src="assets/photos/thailand-temple.jpg" alt="泰國金廟" loading="lazy">
+        <div class="veil"></div>
+        <div class="cap"><div class="en">Thailand</div><h3>泰國</h3><p>金色寺廟與海風</p></div>
+      </a>
+      <a class="dest-card reveal">
+        <img src="assets/photos/hoian-lantern.jpg" alt="會安燈火" loading="lazy">
+        <div class="veil"></div>
+        <div class="cap"><div class="en">Vietnam</div><h3>越南</h3><p>會安燈火與老街氣味</p></div>
+      </a>
+      <a class="dest-card reveal">
+        <img src="assets/photos/bali-terrace.jpg" alt="峇里島梯田" loading="lazy">
+        <div class="veil"></div>
+        <div class="cap"><div class="en">Bali</div><h3>峇里島</h3><p>梯田、神廟與療癒</p></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- WHY -->
+<section class="why" id="private">
+  <div class="wrap sec">
+    <div class="sec-head reveal">
+      <span class="kicker">Why a small-group corner</span>
+      <h2 class="serif">為什麼選擇角落的小包團</h2>
+    </div>
+    <div class="why-grid">
+      <div class="why-item reveal">
+        <div class="why-num">01</div>
+        <h3>不拼團、只走自己人</h3>
+        <p>4–8 人成行，全程都是你認識的人。</p>
+      </div>
+      <div class="why-item reveal">
+        <div class="why-num">02</div>
+        <h3>行程為你量身</h3>
+        <p>不買現成套裝，一條一條陪你排。</p>
+      </div>
+      <div class="why-item reveal">
+        <div class="why-num">03</div>
+        <h3>在地的角落體驗</h3>
+        <p>帶你去當地人才知道的小地方。</p>
+      </div>
+      <div class="why-item reveal">
+        <div class="why-num">04</div>
+        <h3>一對一旅程管家</h3>
+        <p>從規劃到回家，同一個人全程顧你。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="sec" id="journal">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="kicker">How it works</span>
+      <h2 class="serif">三步，從想去到出發</h2>
+    </div>
+    <div class="proc-grid">
+      <div class="proc-item reveal">
+        <div class="proc-num">①</div>
+        <h3>聊聊你想要的旅行</h3>
+        <span class="en">We listen</span>
+      </div>
+      <div class="proc-item reveal">
+        <div class="proc-num">②</div>
+        <h3>為你量身規劃</h3>
+        <span class="en">We tailor</span>
+      </div>
+      <div class="proc-item reveal">
+        <div class="proc-num">③</div>
+        <h3>出發，全程陪伴</h3>
+        <span class="en">We travel with you</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRIPS -->
+<section class="sec" id="about" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="kicker">Now departing</span>
+      <h2 class="serif">正在出發的角落</h2>
+    </div>
+    <div class="trips-grid">
+      <a class="trip-card reveal">
+        <img src="assets/photos/kyoto-temple.jpg" alt="京都奈良" loading="lazy">
+        <div class="veil"></div>
+        <div class="cap">
+          <div class="meta">6 天 5 夜 · 私人小包團</div>
+          <h3>京都・奈良<br>古都慢旅</h3>
+          <div class="price">每人 <b>NT$58,000</b> 起 <span class="hint">（示意）</span></div>
+        </div>
+      </a>
+      <a class="trip-card reveal">
+        <img src="assets/photos/bali-terrace.jpg" alt="峇里島療癒" loading="lazy">
+        <div class="veil"></div>
+        <div class="cap">
+          <div class="meta">5 天 4 夜 · 私人小包團</div>
+          <h3>峇里島<br>療癒森活</h3>
+          <div class="price">每人 <b>NT$42,000</b> 起 <span class="hint">（示意）</span></div>
+        </div>
+      </a>
+      <a class="trip-card reveal">
+        <img src="assets/photos/hoian-lantern.jpg" alt="會安峴港燈火" loading="lazy">
+        <div class="veil"></div>
+        <div class="cap">
+          <div class="meta">5 天 4 夜 · 私人小包團</div>
+          <h3>會安・峴港<br>燈火之旅</h3>
+          <div class="price">每人 <b>NT$36,000</b> 起 <span class="hint">（示意）</span></div>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIAL -->
+<section class="testi">
+  <div class="testi-img"><img src="assets/photos/bali-terrace.jpg" alt="峇里島梯田" loading="lazy"></div>
+  <div class="testi-scrim"></div>
+  <div class="testi-inner wrap reveal">
+    <span class="mark">“</span>
+    <blockquote>第一次有旅行社願意為我們四個人，重排整整一個下午的行程。這不是旅行團，是有人幫你把旅行過好。</blockquote>
+    <cite>— 王小姐，京都私人包團 2025</cite>
+  </div>
+</section>
+
+<!-- CONTACT / FOOTER -->
+<footer class="contact" id="contact">
+  <div class="wrap">
+    <div class="contact-top reveal">
+      <h2 class="serif">說說你心裡的<br>那個角落 <em>— let's talk</em></h2>
+      <a href="mailto:cornertravelagency@gmail.com" class="btn-primary">預約諮詢</a>
+    </div>
+    <div class="footer-grid">
+      <div class="reveal">
+        <div class="logo">角落 <span>·</span> CORNER</div>
+        <p>角落旅行社 CORNER TRAVEL<br>專注私人客製化小包團，<br>為你留下世界上那些<br>拼團去不了的角落。</p>
+      </div>
+      <div class="reveal">
+        <h4>Contact</h4>
+        <p style="line-height:2.2;color:var(--paper-dim)">
+          台北市重慶北路一段67號8樓之2<br>
+          +886 2 7751 6051<br>
+          cornertravelagency@gmail.com
+        </p>
+      </div>
+      <div class="reveal">
+        <h4>Follow</h4>
+        <a href="#">IG ＠cornertravel.w</a>
+        <a href="#">FB 角落旅行社</a>
+        <a href="#">LINE 線上諮詢</a>
+      </div>
+    </div>
+    <div class="footer-legal">
+      <p>© 2025 角落旅行社 CORNER TRAVEL．台北</p>
+      <p>交通部觀光署合法登記旅行社（註冊字號待補）</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Nav scroll state
+  const nav=document.getElementById('nav');
+  const onScroll=()=>{nav.classList.toggle('scrolled',window.scrollY>40)};
+  window.addEventListener('scroll',onScroll,{passive:true});onScroll();
+
+  // Reveal: enhancement only — everything is forced visible within 1.2s as a safety net
+  const els=document.querySelectorAll('.reveal');
+  if('IntersectionObserver' in window){
+    const io=new IntersectionObserver((ents)=>{
+      ents.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}});
+    },{threshold:.12,rootMargin:'0px 0px -8% 0px'});
+    els.forEach(el=>{
+      const r=el.getBoundingClientRect();
+      if(r.top<window.innerHeight*.95){el.classList.add('in')} // in-view immediately
+      else io.observe(el);
+    });
+  }else{els.forEach(el=>el.classList.add('in'))}
+  // Safety net: guarantee all visible
+  window.addEventListener('load',()=>setTimeout(()=>els.forEach(el=>el.classList.add('in')),1200));
+</script>
+</body>
+</html>

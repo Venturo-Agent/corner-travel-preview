@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>六國 × 和紙對角轉場 · 角落 CORNER</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=Noto+Serif+TC:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="corner.css">
+<style>
+  .head{padding:140px 0 20px}
+  .head h1{font-family:"Cormorant Garamond",serif;font-weight:400;font-size:clamp(38px,4.6vw,60px);color:var(--ink);line-height:1}
+  .head .cn{display:block;font-family:"Noto Serif TC",serif;font-weight:500;font-size:22px;color:var(--gold);margin-top:12px;letter-spacing:.06em}
+  .head .lead{margin-top:16px;font-size:17px;color:var(--ink-dim);max-width:42em;line-height:1.85}
+  .row{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;padding:24px 0 110px}
+
+  .dcard{position:relative;height:460px;overflow:hidden;cursor:pointer}
+  .dcard>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:saturate(.94) contrast(1.03) brightness(.92) sepia(.03);transition:transform 1.8s var(--ease-expo)}
+  .dcard:hover>img{transform:scale(1.06)}
+
+  /* 和紙片：兩片半透明，從對角切入；帶該國紋樣鏤空；照片透出 */
+  .paper{position:absolute;inset:0;z-index:1;opacity:0;
+    transition:transform .9s var(--ease-expo),opacity .6s var(--ease-expo);
+    filter:drop-shadow(0 6px 18px rgba(0,0,0,.28))}
+  .paper .shade{position:absolute;inset:0;background:rgba(18,13,8,.22)}
+  .paper .tint{position:absolute;inset:0;background:var(--accent);opacity:.26;mix-blend-mode:multiply}
+  .paper .pat{position:absolute;inset:0;width:100%;height:100%;opacity:.6}
+  /* 預設 TL + BR 對角，藏在角外 */
+  .dcard .p1{clip-path:polygon(0 0,74% 0,0 74%);transform:translate(-28%,-28%)}
+  .dcard .p2{clip-path:polygon(100% 100%,26% 100%,100% 26%);transform:translate(28%,28%)}
+  /* 交替方向 TR + BL */
+  .dcard.trbl .p1{clip-path:polygon(100% 0,26% 0,100% 74%);transform:translate(28%,-28%)}
+  .dcard.trbl .p2{clip-path:polygon(0 100%,74% 100%,0 26%);transform:translate(-28%,28%)}
+  .dcard:hover .paper{opacity:1;transform:translate(0,0)}
+
+  .grad{position:absolute;inset:0;z-index:2;pointer-events:none;background:linear-gradient(0deg,rgba(16,12,8,.8) 0%,rgba(16,12,8,.3) 30%,transparent 54%)}
+  .info{position:absolute;left:28px;right:28px;bottom:28px;z-index:3}
+  .info .en{font-family:"Cormorant Garamond",serif;font-weight:500;text-transform:uppercase;letter-spacing:.24em;font-size:12px;color:var(--accent);margin-bottom:5px;display:block;text-shadow:0 1px 6px rgba(0,0,0,.6)}
+  .info h3{font-family:"Noto Serif TC",serif;font-weight:600;font-size:30px;color:#fff;letter-spacing:.08em;text-shadow:0 2px 14px rgba(0,0,0,.7)}
+  .info .rv{max-height:0;opacity:0;transform:translateY(8px);overflow:hidden;transition:max-height .6s var(--ease-expo),opacity .55s var(--ease-expo) .15s,transform .55s var(--ease-expo) .15s}
+  .dcard:hover .info .rv{max-height:80px;opacity:1;transform:none}
+  .info .sub{display:block;margin-top:8px;font-size:13.5px;letter-spacing:.05em;color:rgba(255,255,255,.9);text-shadow:0 1px 8px rgba(0,0,0,.7)}
+  .info .enter{display:block;margin-top:8px;font-size:13px;letter-spacing:.08em;color:#fff}
+
+  @media(max-width:980px){.row{grid-template-columns:1fr 1fr}}
+  @media(max-width:680px){
+    .row{grid-template-columns:1fr}
+    .dcard{height:380px}
+    .paper{opacity:1!important;transform:translate(0,0)!important}  /* 手機常顯 */
+    .info .rv{max-height:80px!important;opacity:1!important;transform:none!important}
+  }
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" aria-hidden="true" style="position:absolute"><defs>
+  <pattern id="shippo" width="46" height="46" patternUnits="userSpaceOnUse"><g fill="none" stroke="#AFC4E0" stroke-width="1.3"><circle cx="23" cy="23" r="23"/><circle cx="0" cy="23" r="23"/><circle cx="46" cy="23" r="23"/><circle cx="23" cy="0" r="23"/><circle cx="23" cy="46" r="23"/></g><g fill="#AFC4E0"><circle cx="23" cy="23" r="1.8"/></g></pattern>
+  <pattern id="cnLat" width="52" height="52" patternUnits="userSpaceOnUse"><g fill="none" stroke="#E5B3A6" stroke-width="1.3"><rect x="10" y="10" width="32" height="32"/><path d="M26 0 L52 26 L26 52 L0 26 Z"/><path d="M0 0 L10 10 M52 0 L42 10 M0 52 L10 42 M52 52 L42 42"/></g><g fill="#E5B3A6"><circle cx="26" cy="26" r="1.8"/><circle cx="26" cy="0" r="1.4"/><circle cx="26" cy="52" r="1.4"/><circle cx="0" cy="26" r="1.4"/><circle cx="52" cy="26" r="1.4"/></g></pattern>
+  <pattern id="pat-korea" width="52" height="52" patternUnits="userSpaceOnUse"><g fill="none" stroke="#88A89A" stroke-width="1.3"><rect x="18" y="18" width="16" height="16"/><path d="M26 4 L26 18 M26 34 L26 48 M4 26 L18 26 M34 26 L48 26"/><path d="M26 4 L40 4 M26 48 L12 48 M4 26 L4 12 M48 26 L48 40"/><path d="M0 0 L12 0 L12 12 L0 12 M52 0 L40 0 L40 12 L52 12 M0 52 L12 52 L12 40 L0 40 M52 52 L40 52 L40 40 L52 40"/></g><g fill="#88A89A"><circle cx="26" cy="26" r="1.7"/><circle cx="0" cy="0" r="1.4"/><circle cx="52" cy="0" r="1.4"/><circle cx="0" cy="52" r="1.4"/><circle cx="52" cy="52" r="1.4"/></g></pattern>
+  <pattern id="pat-thai" width="52" height="52" patternUnits="userSpaceOnUse"><g fill="none" stroke="#D8BE86" stroke-width="1.35" stroke-linecap="round"><path d="M26 52 C12 41 13 22 24 6 C25 4 27 4 28 6 C39 22 40 41 26 52 Z"/><path d="M26 41 C19 35 20 24 26 15 C32 24 33 35 26 41"/><path d="M26 41 C24 36 24 30 26 25 C28 30 28 36 26 41"/><path d="M0 52 C-9 41 -8 22 0 6 M0 6 C-3 14 -4 24 0 30 M0 30 C4 36 5 44 0 52"/><path d="M52 52 C61 41 60 22 52 6 M52 6 C55 14 56 24 52 30 M52 30 C48 36 47 44 52 52"/></g><g fill="#D8BE86"><circle cx="26" cy="22" r="1.8"/><circle cx="0" cy="22" r="1.6"/><circle cx="52" cy="22" r="1.6"/></g></pattern>
+  <pattern id="pat-viet" width="52" height="52" patternUnits="userSpaceOnUse"><g fill="none" stroke="#E1A99A" stroke-width="1.35"><path d="M0 0 C9 1 13 9 11 17 C4 16 1 9 0 0 Z"/><path d="M0 0 C1 9 9 13 17 11 C16 4 9 1 0 0 Z"/><path d="M52 0 C43 1 39 9 41 17 C48 16 51 9 52 0 Z"/><path d="M52 0 C51 9 43 13 35 11 C36 4 43 1 52 0 Z"/><path d="M0 52 C9 51 13 43 11 35 C4 36 1 43 0 52 Z"/><path d="M0 52 C1 43 9 39 17 41 C16 48 9 51 0 52 Z"/><path d="M52 52 C43 51 39 43 41 35 C48 36 51 43 52 52 Z"/><path d="M52 52 C51 43 43 39 35 41 C36 48 43 51 52 52 Z"/><path d="M26 26 C20 19 21 11 26 6 C31 11 32 19 26 26 Z"/><path d="M26 26 C33 20 41 21 46 26 C41 31 33 32 26 26 Z"/><path d="M26 26 C32 33 31 41 26 46 C21 41 20 33 26 26 Z"/><path d="M26 26 C19 32 11 31 6 26 C11 21 19 20 26 26 Z"/><path d="M26 26 C30 22 35 20 38 17"/><path d="M26 26 C22 22 20 17 17 14"/><path d="M26 26 C22 30 17 32 14 35"/><path d="M26 26 C30 30 35 32 38 35"/><circle cx="26" cy="26" r="3.6"/></g><g fill="#E1A99A"><circle cx="26" cy="26" r="1.8"/><circle cx="0" cy="0" r="1.6"/><circle cx="52" cy="0" r="1.6"/><circle cx="0" cy="52" r="1.6"/><circle cx="52" cy="52" r="1.6"/></g></pattern>
+  <pattern id="pat-bali" width="50" height="50" patternUnits="userSpaceOnUse"><g fill="none" stroke="#A6B888" stroke-width="1.35"><g transform="translate(25,25)"><g transform="rotate(0)"><path d="M0 0 C6.5 -3 7.5 -10 4.2 -15 C1.8 -18.5 -2.2 -18 -4.2 -13.5 C-5.8 -9 -4 -3.5 0 0 Z"/></g><g transform="rotate(72)"><path d="M0 0 C6.5 -3 7.5 -10 4.2 -15 C1.8 -18.5 -2.2 -18 -4.2 -13.5 C-5.8 -9 -4 -3.5 0 0 Z"/></g><g transform="rotate(144)"><path d="M0 0 C6.5 -3 7.5 -10 4.2 -15 C1.8 -18.5 -2.2 -18 -4.2 -13.5 C-5.8 -9 -4 -3.5 0 0 Z"/></g><g transform="rotate(216)"><path d="M0 0 C6.5 -3 7.5 -10 4.2 -15 C1.8 -18.5 -2.2 -18 -4.2 -13.5 C-5.8 -9 -4 -3.5 0 0 Z"/></g><g transform="rotate(288)"><path d="M0 0 C6.5 -3 7.5 -10 4.2 -15 C1.8 -18.5 -2.2 -18 -4.2 -13.5 C-5.8 -9 -4 -3.5 0 0 Z"/></g></g><g transform="translate(0,0)"><g transform="rotate(36)"><path d="M0 0 C6.5 -3 7.5 -10 4.2 -15 C1.8 -18.5 -2.2 -18 -4.2 -13.5 C-5.8 -9 -4 -3.5 0 0 Z"/></g><g transform="rotate(108)"><path d="M0 0 C6.5 -3 7.5 -10 4.2 -15 C1.8 -18.5 -2.2 -18 -4.2 -13.5 C-5.8 -9 -4 -3.5 0 0 Z"/></g><g transform="rotate(180)"><path d="M0 0 C6.5 -3 7.5 -10 4.2 -15 C1.8 -18.5 -2.2 -18 -4.2 -13.5 C-5.8 -9 -4 -3.5 0 0 Z"/></g><g transform="rotate(252)"><path d="M0 0 C6.5 -3 7.5 -10 4.2 -15 C1.8 -18.5 -2.2 -18 -4.2 -13.5 C-5.8 -9 -4 -3.5 0 0 Z"/></g><g transform="rotate(324)"><path d="M0 0 C6.5 -3 7.5 -10 4.2 -15 C1.8 -18.5 -2.2 -18 -4.2 -13.5 C-5.8 -9 -4 -3.5 0 0 Z"/></g></g><g transform="translate(50,0)"><g transform="rotate(36)"><path d="M0 0 C6.5 -3 7.5 -10 4.2 -15 C1.8 -18.5 -2.2 -18 -4.2 -13.5 C-5.8 -9 -4 -3.5 0 0 Z"/></g><g transform="rotate(108)"><path d="M0 0 C6.5 -3 7.5 -10 4.2 -15 C1.8 -18.5 -2.2 -18 -4.2 -13.5 C-5.8 -9 -4 -3.5 0 0 Z"/></g><g transform="rotate(180)"><path d="M0 0 C6.5 -3 7.5 -10 4.2 -15 C1.8 -18.5 -2.2 -18 -4.2 -13.5 C-5.8 -9 -4 -3.5 0 0 Z"/></g><g transform="rotate(252)"><path d="M0 0 C6.5 -3 7.5 -10 4.2 -15 C1.8 -18.5 -2.2 -18 -4.2 -13.5 C-5.8 -9 -4 -3.5 0 0 Z"/></g><g transform="rotate(324)"><path d="M0 0 C6.5 -3 7.5 -10 4.2 -15 C1.8 -18.5 -2.2 -18 -4.2 -13.5 C-5.8 -9 -4 -3.5 0 0 Z"/></g></g><g transform="translate(0,50)"><g transform="rotate(36)"><path d="M0 0 C6.5 -3 7.5 -10 4.2 -15 C1.8 -18.5 -2.2 -18 -4.2 -13.5 C-5.8 -9 -4 -3.5 0 0 Z"/></g><g transform="rotate(108)"><path d="M0 0 C6.5 -3 7.5 -10 4.2 -15 C1.8 -18.5 -2.2 -18 -4.2 -13.5 C-5.8 -9 -4 -3.5 0 0 Z"/></g><g transform="rotate(180)"><path d="M0 0 C6.5 -3 7.5 -10 4.2 -15 C1.8 -18.5 -2.2 -18 -4.2 -13.5 C-5.8 -9 -4 -3.5 0 0 Z"/></g><g transform="rotate(252)"><path d="M0 0 C6.5 -3 7.5 -10 4.2 -15 C1.8 -18.5 -2.2 -18 -4.2 -13.5 C-5.8 -9 -4 -3.5 0 0 Z"/></g><g transform="rotate(324)"><path d="M0 0 C6.5 -3 7.5 -10 4.2 -15 C1.8 -18.5 -2.2 -18 -4.2 -13.5 C-5.8 -9 -4 -3.5 0 0 Z"/></g></g><g transform="translate(50,50)"><g transform="rotate(36)"><path d="M0 0 C6.5 -3 7.5 -10 4.2 -15 C1.8 -18.5 -2.2 -18 -4.2 -13.5 C-5.8 -9 -4 -3.5 0 0 Z"/></g><g transform="rotate(108)"><path d="M0 0 C6.5 -3 7.5 -10 4.2 -15 C1.8 -18.5 -2.2 -18 -4.2 -13.5 C-5.8 -9 -4 -3.5 0 0 Z"/></g><g transform="rotate(180)"><path d="M0 0 C6.5 -3 7.5 -10 4.2 -15 C1.8 -18.5 -2.2 -18 -4.2 -13.5 C-5.8 -9 -4 -3.5 0 0 Z"/></g><g transform="rotate(252)"><path d="M0 0 C6.5 -3 7.5 -10 4.2 -15 C1.8 -18.5 -2.2 -18 -4.2 -13.5 C-5.8 -9 -4 -3.5 0 0 Z"/></g><g transform="rotate(324)"><path d="M0 0 C6.5 -3 7.5 -10 4.2 -15 C1.8 -18.5 -2.2 -18 -4.2 -13.5 C-5.8 -9 -4 -3.5 0 0 Z"/></g></g></g><g fill="#A6B888"><circle cx="25" cy="25" r="1.7"/><circle cx="0" cy="0" r="1.5"/><circle cx="50" cy="0" r="1.5"/><circle cx="0" cy="50" r="1.5"/><circle cx="50" cy="50" r="1.5"/><circle cx="25" cy="0" r="1.1"/><circle cx="0" cy="25" r="1.1"/><circle cx="50" cy="25" r="1.1"/><circle cx="25" cy="50" r="1.1"/></g></pattern>
+</defs></svg>
+
+<nav id="nav">
+  <a href="index.html" class="logo"><span class="mark">角</span><span class="cn2">落</span><span class="dot">·</span><span class="en">Corner</span></a>
+  <div class="nav-links"><a href="moments.html">目的地</a><a href="dest-styles.html">刷入版</a><a href="index.html#contact">聯絡</a><a href="index.html#contact" class="nav-cta">預約諮詢</a></div>
+  <button class="nav-toggle" aria-label="選單"><span></span><span></span><span></span></button>
+</nav>
+<div class="nav-menu"><a href="moments.html">目的地</a><a href="dest-styles.html">刷入版</a><a href="index.html#contact">聯絡</a><a href="index.html#contact">預約諮詢</a></div>
+
+<header class="head">
+  <div class="wrap">
+    <div class="kicker">WASHI TRANSITION<span class="sep"></span><span class="cn">和紙對角轉場</span></div>
+    <h1 style="margin-top:16px">Six lands, washi reveal<span class="cn">六國 × 和紙對角切入（滑鼠移上去看）</span></h1>
+    <p class="lead">滑鼠移過去，兩片帶著該國紋樣的「和紙」從對角（左上＋右下／右上＋左下交替）切進來——半透明、照片從和紙與鏤空裡透出，文字一起浮現。奢華的日式轉場感。</p>
+  </div>
+</header>
+
+<section class="wrap">
+  <div class="row">
+    <article class="dcard tlbr" style="--accent:#AFC4E0">
+      <img src="assets/photos/kyoto-temple.jpg" alt="日本">
+      <div class="paper p1"><div class="shade"></div><div class="tint"></div><svg class="pat"><rect width="100%" height="100%" fill="url(#shippo)"/></svg></div>
+      <div class="paper p2"><div class="shade"></div><div class="tint"></div><svg class="pat"><rect width="100%" height="100%" fill="url(#shippo)"/></svg></div>
+      <div class="grad"></div>
+      <div class="info">
+        <span class="en">Japan</span>
+        <h3>日本</h3>
+        <div class="rv"><span class="sub">靛藍・七寶相扣的四季</span><span class="enter">進入日本的角落 →</span></div>
+      </div>
+    </article>
+    <article class="dcard trbl" style="--accent:#88A89A">
+      <img src="assets/photos/korea-hanok.jpg" alt="韓國">
+      <div class="paper p1"><div class="shade"></div><div class="tint"></div><svg class="pat"><rect width="100%" height="100%" fill="url(#pat-korea)"/></svg></div>
+      <div class="paper p2"><div class="shade"></div><div class="tint"></div><svg class="pat"><rect width="100%" height="100%" fill="url(#pat-korea)"/></svg></div>
+      <div class="grad"></div>
+      <div class="info">
+        <span class="en">Korea</span>
+        <h3>韓國</h3>
+        <div class="rv"><span class="sub">丹青・古宮與市井的慢時光</span><span class="enter">進入韓國的角落 →</span></div>
+      </div>
+    </article>
+    <article class="dcard tlbr" style="--accent:#E5B3A6">
+      <img src="assets/photos/china-scenic.jpg" alt="中國">
+      <div class="paper p1"><div class="shade"></div><div class="tint"></div><svg class="pat"><rect width="100%" height="100%" fill="url(#cnLat)"/></svg></div>
+      <div class="paper p2"><div class="shade"></div><div class="tint"></div><svg class="pat"><rect width="100%" height="100%" fill="url(#cnLat)"/></svg></div>
+      <div class="grad"></div>
+      <div class="info">
+        <span class="en">China</span>
+        <h3>中國</h3>
+        <div class="rv"><span class="sub">朱紅・窗櫺裡的山水</span><span class="enter">進入中國的角落 →</span></div>
+      </div>
+    </article>
+    <article class="dcard trbl" style="--accent:#D8BE86">
+      <img src="assets/photos/thailand-temple.jpg" alt="泰國">
+      <div class="paper p1"><div class="shade"></div><div class="tint"></div><svg class="pat"><rect width="100%" height="100%" fill="url(#pat-thai)"/></svg></div>
+      <div class="paper p2"><div class="shade"></div><div class="tint"></div><svg class="pat"><rect width="100%" height="100%" fill="url(#pat-thai)"/></svg></div>
+      <div class="grad"></div>
+      <div class="info">
+        <span class="en">Thailand</span>
+        <h3>泰國</h3>
+        <div class="rv"><span class="sub">鎏金・金廟與海風</span><span class="enter">進入泰國的角落 →</span></div>
+      </div>
+    </article>
+    <article class="dcard tlbr" style="--accent:#E1A99A">
+      <img src="assets/photos/hoian-lantern.jpg" alt="越南">
+      <div class="paper p1"><div class="shade"></div><div class="tint"></div><svg class="pat"><rect width="100%" height="100%" fill="url(#pat-viet)"/></svg></div>
+      <div class="paper p2"><div class="shade"></div><div class="tint"></div><svg class="pat"><rect width="100%" height="100%" fill="url(#pat-viet)"/></svg></div>
+      <div class="grad"></div>
+      <div class="info">
+        <span class="en">Vietnam</span>
+        <h3>越南</h3>
+        <div class="rv"><span class="sub">朱紅・會安燈火與老街</span><span class="enter">進入越南的角落 →</span></div>
+      </div>
+    </article>
+    <article class="dcard trbl" style="--accent:#A6B888">
+      <img src="assets/photos/bali-terrace.jpg" alt="峇里島">
+      <div class="paper p1"><div class="shade"></div><div class="tint"></div><svg class="pat"><rect width="100%" height="100%" fill="url(#pat-bali)"/></svg></div>
+      <div class="paper p2"><div class="shade"></div><div class="tint"></div><svg class="pat"><rect width="100%" height="100%" fill="url(#pat-bali)"/></svg></div>
+      <div class="grad"></div>
+      <div class="info">
+        <span class="en">Bali</span>
+        <h3>峇里島</h3>
+        <div class="rv"><span class="sub">翠綠・梯田神廟與療癒</span><span class="enter">進入峇里島的角落 →</span></div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<script src="corner.js"></script>
+</body>
+</html>
